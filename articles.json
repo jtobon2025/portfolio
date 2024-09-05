@@ -1,0 +1,24 @@
+{
+    "current": [
+        {
+            "title": "Current Article 1",
+            "summary": "Summary of the current article 1.",
+            "link": "#",
+            "date": "2024-09-05"
+        },
+        {
+            "title": "Current Article 2",
+            "summary": "Summary of the current article 2.",
+            "link": "#",
+            "date": "2024-08-20"
+        }
+    ],
+    "archived": [
+        {
+            "title": "Archived Article 1",
+            "summary": "Summary of an older article that is now archived.",
+            "link": "#",
+            "date": "2023-12-15"
+        }
+    ]
+}
