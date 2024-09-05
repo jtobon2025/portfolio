@@ -1,0 +1,308 @@
+/* Reseteo y estructura básica */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column; /* Cambia a columna para alinear verticalmente */
+    align-items: flex-start; /* Alinea el contenido a la izquierda */
+}
+
+/* Título del header */
+header h1 {
+    margin-bottom: 1rem; /* Añade espacio debajo del título */
+}
+
+/* Navegación */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Submenú */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 150px;
+}
+
+.submenu li a {
+    color: #fff;
+    padding: 10px 15px;
+    display: block;
+}
+
+.submenu li a:hover {
+    background: #555;
+}
+
+/* Mostrar submenú al pasar el ratón */
+.dropdown:hover .submenu {
+    display: block;
+}
+
+/* Main ajustado */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Footer con franja negra al fondo */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Sección Home */
+.home-section {
+    padding: 2rem;
+    background-color: #ffffff;
+    margin: 1rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.home-section h2 {
+    margin-bottom: 1rem;
+}
+
+.home-section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Sección About */
+.about-section {
+    padding: 2rem;
+    background-color: #f4f4f4;
+    margin: 1rem 2rem;
+    border-radius: 8px;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre la foto y el texto */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten */
+}
+
+.profile-photo {
+    width: 150px; /* Ajusta el tamaño según tu preferencia */
+    height: 150px;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover;
+    border: 3px solid #333; /* Añade un borde elegante */
+}
+
+.about-text {
+    max-width: 600px;
+}
+
+.about-section h2 {
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    margin-bottom: 1rem;
+}
+
+.about-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.about-section li {
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    /* Ajustes para tabletas y pantallas medianas */
+    header {
+        padding: 1rem;
+    }
+
+    nav ul {
+        gap: 0.5rem;
+    }
+
+    .home-section, .about-section {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .about-content {
+        flex-direction: column; /* Cambia a columna en pantallas medianas */
+        text-align: center;
+    }
+
+    .profile-photo {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes para móviles */
+    header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .home-section h2 {
+        font-size: 2.5rem;
+    }
+
+    .home-section p, .about-section p {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
+}
+/* Galería de Imágenes */
+.image-gallery {
+    margin-top: 2rem;
+}
+
+.images-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.images-container img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Sección de Artículos */
+.articles-section {
+    margin-top: 2rem;
+}
+
+.articles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.article {
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.article h4 {
+    margin-bottom: 0.5rem;
+}
+
+.article p {
+    margin-bottom: 0.5rem;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+/* Sección de Artículos */
+.articles-section {
+    margin-top: 2rem;
+}
+
+.articles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.article {
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border-radius: 8px;
+    max-height: 300px; /* Limita la altura del artículo */
+    overflow: hidden; /* Oculta el contenido que excede el tamaño */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es muy largo */
+    position: relative;
+}
+
+.article:hover {
+    overflow: auto; /* Muestra el contenido completo al pasar el ratón */
+    max-height: none; /* Permite ver todo el contenido al hacer hover */
+}
+
+.article h4 {
+    margin-bottom: 0.5rem;
+}
+
+.article p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
