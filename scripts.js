@@ -135,4 +135,44 @@ document.getElementById('hideArchivedButton').addEventListener('click', function
     document.getElementById('archivedArticlesContainer').classList.add('hidden'); // Ocultar los artículos
     this.classList.add('hidden'); // Ocultar el botón de ocultar todos
 });
+let currentLanguage = 'es'; // Idioma por defecto
+
+// Función para cambiar el idioma
+function changeLanguage(language) {
+    currentLanguage = language;
+    loadArticles(); // Recarga los artículos en el idioma seleccionado
+}
+
+// Función para cargar artículos desde el JSON
+function loadArticles() {
+    fetch('articles.json')
+        .then(response => response.json())
+        .then(data => {
+            const articlesContainer = document.getElementById('articles-container');
+            articlesContainer.innerHTML = ''; // Limpiar contenido anterior
+
+            data.current.forEach(article => {
+                const articleElement = createArticleElement(article);
+                articlesContainer.appendChild(articleElement);
+            });
+        })
+        .catch(error => console.error('Error loading articles:', error));
+}
+
+// Función para crear un elemento de artículo basado en el idioma
+function createArticleElement(article) {
+    const articleElement = document.createElement('article');
+    articleElement.classList.add('article');
+    articleElement.innerHTML = `
+        <h4>${article.title[currentLanguage]}</h4>
+        <p>${article.summary[currentLanguage]}</p>
+        <a href="${article.link}" class="read-more">Read More</a>
+    `;
+    return articleElement;
+}
+
+// Inicializar al cargar la página
+window.onload = function() {
+    loadArticles(); // Cargar artículos en el idioma predeterminado
+};
 
