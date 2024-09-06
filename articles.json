@@ -33,31 +33,31 @@
     ],
     "archived": [
         {
-            "title": "Archived Article 1",
+            "title": "Archived Article 17",
             "summary": "Summary of an older article that is now archived.",
             "link": "#",
             "date": "2023-12-15"
         },
         {
-            "title": "Archived Article 2",
+            "title": "Archived Article 18",
             "summary": "Summary of another older article that is now archived.",
             "link": "#",
             "date": "2023-11-10"
         },
         {
-            "title": "Archived Article 3",
+            "title": "Archived Article 19",
             "summary": "Summary of another archived article.",
             "link": "#",
             "date": "2023-10-05"
         },
         {
-            "title": "Archived Article 4",
+            "title": "Archived Article 20",
             "summary": "Summary of a previous archived article.",
             "link": "#",
             "date": "2023-09-01"
         },
         {
-            "title": "Archived Article 5",
+            "title": "Archived Article 21",
             "summary": "Summary of another archived article that was published earlier.",
             "link": "#",
             "date": "2023-08-25"
