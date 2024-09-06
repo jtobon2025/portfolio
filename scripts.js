@@ -81,16 +81,26 @@ function moveSlide(n) {
     const width = slides[0].clientWidth;
     document.querySelector('.carousel-container').style.transform = `translateX(-${slideIndex * width}px)`;
 }
-// Evento para alternar la visibilidad de los artículos archivados
-document.getElementById('toggleArchivedButton').addEventListener('click', function() {
+// Evento para mostrar los artículos archivados
+function showArchivedArticles(archivedArticles) {
     const archivedContainer = document.getElementById('archivedArticlesContainer');
+    archivedContainer.innerHTML = ''; // Limpiar contenido previo
 
-    // Alterna la clase 'hidden' y ajusta el texto del botón
-    if (archivedContainer.classList.contains('hidden')) {
-        archivedContainer.classList.remove('hidden');
-        this.textContent = 'Hide Archived Articles';
-    } else {
-        archivedContainer.classList.add('hidden');
+    archivedArticles.forEach(article => {
+        const articleElement = createArticleElement(article);
+        archivedContainer.appendChild(articleElement);
+    });
+
+    archivedContainer.classList.remove('hidden'); // Mostrar los artículos archivados
+    document.getElementById('hideArchivedButton').classList.remove('hidden'); // Mostrar botón para ocultar
+}
+
+// Evento para ocultar los artículos archivados
+document.getElementById('hideArchivedButton').addEventListener('click', function() {
+    document.getElementById('archivedArticlesContainer').classList.add('hidden'); // Ocultar los artículos
+    this.classList.add('hidden'); // Ocultar el botón de ocultar
+});
+
         this.textContent = 'Show Archived Articles';
     }
 });
