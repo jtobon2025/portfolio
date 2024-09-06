@@ -85,12 +85,14 @@ function moveSlide(n) {
 document.getElementById('toggleArchivedButton').addEventListener('click', function() {
     const archivedContainer = document.getElementById('archivedArticlesContainer');
 
+    // Alterna la clase 'hidden' y ajusta el texto del botón
     if (archivedContainer.classList.contains('hidden')) {
         archivedContainer.classList.remove('hidden');
-        this.textContent = 'Hide Archived Articles'; // Cambiar texto del botón
+        this.textContent = 'Hide Archived Articles';
     } else {
         archivedContainer.classList.add('hidden');
-        this.textContent = 'Show Archived Articles'; // Cambiar texto del botón
+        this.textContent = 'Show Archived Articles';
     }
 });
+
 
