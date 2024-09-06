@@ -52,29 +52,6 @@ function createArticleElement(article) {
     return articleElement;
 }
 
-// Función para abrir la ventana modal con el contenido del artículo
-function openModal(title, summary, link) {
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalSummary').textContent = summary;
-    document.getElementById('modalLink').href = link;
-    document.getElementById('articleModal').style.display = 'block';
-}
-
-// Función para cerrar la ventana modal
-function closeModal() {
-    document.getElementById('articleModal').style.display = 'none';
-}
-
-// Añadir evento al botón de cerrar la ventana modal
-document.querySelector('.close').onclick = closeModal;
-
-// Cerrar la ventana modal si se hace clic fuera del contenido de la modal
-window.onclick = function(event) {
-    const modal = document.getElementById('articleModal');
-    if (event.target === modal) {
-        closeModal();
-    }
-}
 
 
 // Función para mostrar la sección seleccionada y ocultar las demás
