@@ -10,10 +10,9 @@
 <body>
 
     <!-- Header -->
-    <!-- Header -->
     <header>
         <nav>
-            <h1>Mi Portafolio</h1>
+            <h1>My Portfolio</h1>
             <ul>
                 <li><a href="index.html">Home</a></li>
             </ul>
@@ -24,54 +23,43 @@
     <main class="project-content">
         <h2>Project Title</h2>
 
-        <!-- Sección de Descripción del Proyecto -->
-<section class="project-description">
-    <h3>Resumen del Proyecto</h3>
-    <p>Este proyecto implementa una clase compleja para analizar y proyectar el flujo de caja usando datos históricos almacenados en una base de datos SQLite, integrando funcionalidades avanzadas de procesamiento de datos, visualización con Plotly y cálculos financieros. La interfaz de usuario está desarrollada en HTML5 y JavaScript, mientras que la lógica de negocio se gestiona en Python utilizando un servidor Flask.</p>
-    
-    <p>Además, la clase permite comparar dos proyecciones de flujo de caja para observar variaciones en las estimaciones de flujos de entradas y salidas de dinero, facilitando la toma de decisiones estratégicas basadas en diferentes escenarios financieros.</p>
+        <!-- Project Description Section -->
+        <section class="project-description">
+            <h3>Project Overview</h3>
+            <p>This project implements a complex class to analyze and project cash flow using historical data stored in a SQLite database, integrating advanced data processing, visualization with Plotly, and financial calculations. The user interface is developed in HTML5 and JavaScript, while the business logic is managed in Python using a Flask server.</p>
+            
+            <p>The class also allows comparing two cash flow projections to observe variations in estimates of cash inflows and outflows, facilitating strategic decision-making based on different financial scenarios.</p>
 
-    <p>La clase también cuenta con un método avanzado que permite calcular la cantidad de dinero adicional necesaria para alcanzar un saldo de caja objetivo. Este método evalúa las proyecciones de flujos de ingresos y egresos, ajustando las entradas de efectivo según sea necesario para mantener el saldo en el nivel deseado, proporcionando una herramienta útil para la planificación de la tesorería y la toma de decisiones estratégicas.</p>
+            <p>Additionally, the class features an advanced method that calculates the additional cash needed to reach a target balance. This method evaluates projected inflows and outflows, adjusting cash entries as needed to maintain the balance at the desired level, providing a useful tool for treasury planning and strategic decision-making.</p>
 
-    <h4>Fortalezas del Código</h4>
-    <ul>
-        <li><strong>Estructura Completa y Funcional:</strong> La clase <code>AdvancedCashFlowAnalyzer</code> abarca un amplio conjunto de funcionalidades, desde la conexión a la base de datos, la obtención y filtrado de datos, hasta la integración de supuestos y la generación de gráficos interactivos. Esta estructura es ideal para proyectos que requieren un análisis detallado de flujos de caja.</li>
-        <li><strong>Uso de Pandas y Plotly:</strong> El código utiliza <code>pandas</code> para el manejo de datos y <code>plotly</code> para generar gráficos interactivos, lo cual facilita la comprensión de los resultados y permite una presentación profesional.</li>
-        <li><strong>Manejo de Excepciones y Registro de Errores:</strong> Incluye un manejo de excepciones robusto, registrando los errores detalladamente, lo cual es esencial para identificar y corregir problemas durante la ejecución.</li>
-        <li><strong>Flexibilidad en los Parámetros de Análisis:</strong> Los métodos permiten ajustar varios parámetros, como fechas, niveles, monedas, tipos de gráficos, y más. Esto proporciona una alta flexibilidad para analizar diferentes escenarios y personalizar el análisis según las necesidades del usuario.</li>
-        <li><strong>Integración de Supuestos:</strong> El método <code>process_supuestos</code> permite integrar supuestos adicionales en el análisis, lo cual es muy útil para ajustar los cálculos a escenarios específicos que puedan influir en el flujo de caja proyectado.</li>
-        <li><strong>Funciones Avanzadas como el Cálculo del Saldo:</strong> Usa un método para calcular el saldo proyectado, que permite simular cómo evolucionaría el saldo de caja bajo diferentes condiciones de flujos de ingresos y egresos.</li>
-        <li><strong>Comparación de Proyecciones:</strong> La clase permite comparar dos proyecciones de flujo de caja para evaluar las diferencias en las estimaciones, lo que facilita el análisis de variaciones en los flujos de entrada y salida.</li>
-    </ul>
-</section>
+            <h4>Code Strengths</h4>
+            <ul>
+                <li><strong>Complete and Functional Structure:</strong> The <code>AdvancedCashFlowAnalyzer</code> class covers a wide range of features, from database connection, data retrieval, and filtering, to the integration of assumptions and interactive graph generation. This structure is ideal for projects requiring detailed cash flow analysis.</li>
+                <li><strong>Use of Pandas and Plotly:</strong> The code uses <code>pandas</code> for data handling and <code>plotly</code> to generate interactive charts, facilitating the understanding of results and allowing professional presentation.</li>
+                <li><strong>Error Handling and Logging:</strong> It includes robust exception handling, logging errors in detail, which is essential for identifying and correcting issues during execution.</li>
+                <li><strong>Flexibility in Analysis Parameters:</strong> Methods allow adjusting various parameters such as dates, levels, currencies, chart types, and more, providing high flexibility to analyze different scenarios and customize the analysis according to user needs.</li>
+                <li><strong>Integration of Assumptions:</strong> The <code>process_supuestos</code> method allows integrating additional assumptions into the analysis, which is very useful for adjusting calculations to specific scenarios that may influence projected cash flows.</li>
+                <li><strong>Advanced Balance Calculation Functions:</strong> It uses a method to calculate the projected balance, simulating how the cash balance would evolve under different conditions of income and outflow.</li>
+                <li><strong>Projection Comparison:</strong> The class allows comparing two cash flow projections to assess differences in estimates, facilitating the analysis of variations in cash inflows and outflows.</li>
+            </ul>
+        </section>
 
-
-        <!-- Sección de Imágenes o Gráficos -->
-        <!--POR FAVOR NO QUITAR COMENTARIO quitar esto para eliminar comentario
-        <div class="project-images">
-            <img src="image1.jpg" alt="Descripción de la imagen 1">
-            <img src="image2.jpg" alt="Descripción de la imagen 2">
-        </div>
-        POR FAVOR NO quitar comentario-->
-
-        <!-- Sección para gráficos con Plotly -->
+        <!-- Plotly Graph Section -->
         <div id="graph-container">
-            <!-- Primer gráfico -->
-
-            <iframe src="saldo_proyectado_combinado.html" width="100%" height="500px" style="border:none;"></iframe>
-     
             <iframe src="saldo_proyectado.html" width="100%" height="500px" style="border:none;"></iframe>
+            <iframe src="saldo_proyectado_combinado.html" width="100%" height="500px" style="border:none;"></iframe>
+           
         </div>
 
-        <!-- Botón para volver al inicio -->
-        <a href="index.html" class="back-button">Regresar al Home</a>
+        <!-- Back to Home Button -->
+        <a href="index.html" class="back-button">Return to Home</a>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>© 2024 Jorge Tobón. Todos los derechos reservados.</p>
+        <p>© 2024 Jorge Tobón. All rights reserved.</p>
     </footer>
 
+    <script src="scripts.js"></script>
 </body>
 </html>
-
