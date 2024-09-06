@@ -1,7 +1,7 @@
 {
     "current": [
         {
-            "title": "cash flow",
+            "title": "Dynamic Projected Cash Flow Chart",
             "summary": "This project implements a complex class to analyze and project cash flow using historical data stored in a SQLite database",
             "link": "project-template.html",
             "date": "2024-09-05"
