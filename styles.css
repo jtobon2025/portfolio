@@ -314,12 +314,15 @@ footer {
 /* Ajustes para la descripción del proyecto */
 .project-description {
     margin-bottom: 30px; /* Añade espacio entre la descripción y los gráficos */
+    padding: 20px; /* Añade padding para mejorar la legibilidad */
+    background-color: #f4f4f4; /* Fondo ligero para destacar la sección */
+    border-radius: 8px; /* Bordes redondeados */
 }
 
 /* Ajustes para la sección de gráficos */
 .graph-section {
     padding-top: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
     border-top: 2px solid #ccc; /* Línea separadora opcional */
 }
 
