@@ -308,3 +308,6 @@ footer {
 .read-more:hover, .show-archived-btn:hover {
     background-color: #0056b3;
 }
+.hidden {
+    display: none;
+}
