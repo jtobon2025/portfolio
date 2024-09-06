@@ -311,4 +311,27 @@ footer {
 .hidden {
     display: none;
 }
+/* Ajustes para la descripción del proyecto */
+.project-description {
+    margin-bottom: 30px; /* Añade espacio entre la descripción y los gráficos */
+}
+
+/* Ajustes para la sección de gráficos */
+.graph-section {
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 2px solid #ccc; /* Línea separadora opcional */
+}
+
+/* Ajustes generales */
+iframe {
+    margin-bottom: 20px; /* Espacio entre gráficos */
+}
+
+/* Estilos adicionales para mantener cada sección separada */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre cada sección */
+}
 
