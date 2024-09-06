@@ -53,36 +53,6 @@ function createArticleElement(article) {
 
 // Función para mostrar los artículos archivados
 function showArchivedArticles(archivedArticles) {
-    const articlesContainer = document.getElementById('articles-container');
-    const archivedContainer = document.createElement('div');
-    archivedContainer.classList.add('archived-container');
-
-    archivedArticles.forEach(article => {
-        const articleElement = createArticleElement(article);
-        archivedContainer.appendChild(articleElement);
-    });
-
-    articlesContainer.appendChild(archivedContainer);
-}
-
-// Función del Carrusel
-let slideIndex = 0;
-
-function moveSlide(n) {
-    const slides = document.querySelectorAll('.carousel-container img');
-    slideIndex += n;
-
-    if (slideIndex < 0) {
-        slideIndex = slides.length - 1;
-    } else if (slideIndex >= slides.length) {
-        slideIndex = 0;
-    }
-
-    const width = slides[0].clientWidth;
-    document.querySelector('.carousel-container').style.transform = `translateX(-${slideIndex * width}px)`;
-}
-// Evento para mostrar los artículos archivados
-function showArchivedArticles(archivedArticles) {
     const archivedContainer = document.getElementById('archivedArticlesContainer');
     archivedContainer.innerHTML = ''; // Limpiar contenido previo
 
@@ -100,9 +70,3 @@ document.getElementById('hideArchivedButton').addEventListener('click', function
     document.getElementById('archivedArticlesContainer').classList.add('hidden'); // Ocultar los artículos
     this.classList.add('hidden'); // Ocultar el botón de ocultar
 });
-
-        this.textContent = 'Show Archived Articles';
-    }
-});
-
-
