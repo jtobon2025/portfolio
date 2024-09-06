@@ -22,40 +22,49 @@
     <!-- Main Content -->
     <main class="project-content">
         <h2>Project Title</h2>
-        <p>En la contabilidad financiera de una empresa, el flujo de caja es uno de los indicadores más importantes, ya que brinda información sobre los ingresos y gastos, permitiendo determinar la solvencia y liquidez del negocio...</p>
 
-        <h3>¿Qué es el flujo de caja?</h3>
-        <p>El flujo de caja se refiere a la información sobre los recursos que genera una empresa, tanto los flujos de entrada como de salida, en un periodo de tiempo específico...</p>
-
-        <h3>Tipos de flujo de caja</h3>
-        <ul>
-            <li><strong>Flujo de caja operativo:</strong> Cantidad de dinero en efectivo que entra y sale de la empresa mediante las operaciones directamente relacionadas con el ejercicio de su actividad...</li>
-            <li><strong>Flujo de caja de inversión:</strong> Cantidad de dinero ingresada o gastada según las inversiones de la empresa...</li>
-            <li><strong>Flujo de caja financiero:</strong> Movimientos en efectivo de las inversiones financieras de la empresa...</li>
-        </ul>
+        <!-- Sección de Descripción del Proyecto -->
+        <section class="project-description">
+            <h3>Resumen del Proyecto</h3>
+            <p>Este proyecto implementa una clase compleja para analizar y proyectar el flujo de caja usando datos históricos almacenados en una base de datos SQLite, integrando funcionalidades avanzadas de procesamiento de datos, visualización con Plotly y cálculos financieros. La interfaz de usuario está desarrollada en HTML5 y JavaScript, mientras que la lógica de negocio se gestiona en Python utilizando un servidor Flask.</p>
+            
+            <h4>Fortalezas del Código</h4>
+            <ul>
+                <li><strong>Estructura Completa y Funcional:</strong> La clase <code>AdvancedCashFlowAnalyzer</code> abarca un amplio conjunto de funcionalidades, desde la conexión a la base de datos, la obtención y filtrado de datos, hasta la integración de supuestos y la generación de gráficos interactivos. Esta estructura es ideal para proyectos que requieren un análisis detallado de flujos de caja.</li>
+                <li><strong>Uso de Pandas y Plotly:</strong> El código utiliza <code>pandas</code> para el manejo de datos y <code>plotly</code> para generar gráficos interactivos, lo cual facilita la comprensión de los resultados y permite una presentación profesional.</li>
+                <li><strong>Manejo de Excepciones y Registro de Errores:</strong> Incluye un manejo de excepciones robusto, registrando los errores detalladamente, lo cual es esencial para identificar y corregir problemas durante la ejecución.</li>
+                <li><strong>Flexibilidad en los Parámetros de Análisis:</strong> Los métodos permiten ajustar varios parámetros, como fechas, niveles, monedas, tipos de gráficos, y más. Esto proporciona una alta flexibilidad para analizar diferentes escenarios y personalizar el análisis según las necesidades del usuario.</li>
+                <li><strong>Integración de Supuestos:</strong> El método <code>process_supuestos</code> permite integrar supuestos adicionales en el análisis, lo cual es muy útil para ajustar los cálculos a escenarios específicos que puedan influir en el flujo de caja proyectado.</li>
+                <li><strong>Funciones Avanzadas como el Cálculo del Saldo:</strong> Usa un método para calcular el saldo proyectado, que permite simular cómo evolucionaría el saldo de caja bajo diferentes condiciones de flujos de ingresos y egresos.</li>
+            </ul>
+        </section>
 
         <!-- Sección de Imágenes o Gráficos -->
-         <!--quitar esto para eliminar comentario
-             <div class="project-images">
+        <!--POR FAVOR NO QUITAR COMENTARIO quitar esto para eliminar comentario
+        <div class="project-images">
             <img src="image1.jpg" alt="Descripción de la imagen 1">
             <img src="image2.jpg" alt="Descripción de la imagen 2">
         </div>
-        quitar esto para eliminar comentario-->
+        POR FAVOR NO quitar comentario-->
 
         <!-- Sección para gráficos con Plotly -->
         <div id="graph-container">
+            <!-- Primer gráfico -->
+
             <iframe src="saldo_proyectado_combinado.html" width="100%" height="500px" style="border:none;"></iframe>
      
             <iframe src="saldo_proyectado.html" width="100%" height="500px" style="border:none;"></iframe>
         </div>
+
         <!-- Botón para volver al inicio -->
         <a href="index.html" class="back-button">Regresar al Home</a>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>© 2024 Mi Nombre. Todos los derechos reservados.</p>
+        <p>© 2024 Jorge Tobón. Todos los derechos reservados.</p>
     </footer>
 
 </body>
 </html>
+
