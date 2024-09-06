@@ -11,6 +11,24 @@
             "summary": "Summary of the current article 2.",
             "link": "#",
             "date": "2024-08-20"
+        },
+        {
+            "title": "Current Article 3",
+            "summary": "Summary of the current article 3.",
+            "link": "#",
+            "date": "2024-08-15"
+        },
+        {
+            "title": "Current Article 4",
+            "summary": "Summary of the current article 4.",
+            "link": "#",
+            "date": "2024-07-30"
+        },
+        {
+            "title": "Current Article 5",
+            "summary": "Summary of the current article 5.",
+            "link": "#",
+            "date": "2024-07-10"
         }
     ],
     "archived": [
@@ -19,6 +37,31 @@
             "summary": "Summary of an older article that is now archived.",
             "link": "#",
             "date": "2023-12-15"
+        },
+        {
+            "title": "Archived Article 2",
+            "summary": "Summary of another older article that is now archived.",
+            "link": "#",
+            "date": "2023-11-10"
+        },
+        {
+            "title": "Archived Article 3",
+            "summary": "Summary of another archived article.",
+            "link": "#",
+            "date": "2023-10-05"
+        },
+        {
+            "title": "Archived Article 4",
+            "summary": "Summary of a previous archived article.",
+            "link": "#",
+            "date": "2023-09-01"
+        },
+        {
+            "title": "Archived Article 5",
+            "summary": "Summary of another archived article that was published earlier.",
+            "link": "#",
+            "date": "2023-08-25"
         }
     ]
 }
+
