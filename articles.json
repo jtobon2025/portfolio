@@ -3,13 +3,13 @@
         {
             "title": "Current Article 1",
             "summary": "Generar un grafico de flujos de cajas dinamicos, proyecto elaborado para un cliente que requeria cargar ......",
-            "link": "#",
+            "link": "project-template.html",
             "date": "2024-09-05"
         },
         {
             "title": "Current Article 2",
             "summary": "Summary of the current article 2.",
-            "link": "#",
+            "link": "project-template.html",
             "date": "2024-08-20"
         },
         {
