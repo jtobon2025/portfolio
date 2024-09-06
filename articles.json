@@ -1,66 +1,42 @@
 {
     "current": [
         {
-            "title": "Current Article 1",
-            "summary": "Generar un grafico de flujos de cajas dinamicos, proyecto elaborado para un cliente que requeria cargar ......",
-            "link": "project-template.html",
+            "title": {
+                "es": "Artículo Actual 1",
+                "en": "Current Article 1"
+            },
+            "summary": {
+                "es": "Este es un resumen del artículo actual en español.",
+                "en": "This is a summary of the current article in English."
+            },
+            "link": "#",
             "date": "2024-09-05"
         },
         {
-            "title": "Current Article 2",
-            "summary": "Summary of the current article 2.",
-            "link": "project-template.html",
+            "title": {
+                "es": "Artículo Actual 2",
+                "en": "Current Article 2"
+            },
+            "summary": {
+                "es": "Resumen del artículo 2 en español.",
+                "en": "Summary of the current article 2 in English."
+            },
+            "link": "#",
             "date": "2024-08-20"
-        },
-        {
-            "title": "Current Article 3",
-            "summary": "Summary of the current article 3.",
-            "link": "#",
-            "date": "2024-08-15"
-        },
-        {
-            "title": "Current Article 4",
-            "summary": "Summary of the current article 4.",
-            "link": "#",
-            "date": "2024-07-30"
-        },
-        {
-            "title": "Current Article 5",
-            "summary": "Summary of the current article 5.",
-            "link": "#",
-            "date": "2024-07-10"
         }
     ],
     "archived": [
         {
-            "title": "Archived Article 17",
-            "summary": "Summary of an older article that is now archived.",
+            "title": {
+                "es": "Artículo Archivado 1",
+                "en": "Archived Article 1"
+            },
+            "summary": {
+                "es": "Resumen del artículo archivado en español.",
+                "en": "Summary of an older article that is now archived in English."
+            },
             "link": "#",
             "date": "2023-12-15"
-        },
-        {
-            "title": "Archived Article 18",
-            "summary": "Summary of another older article that is now archived.",
-            "link": "#",
-            "date": "2023-11-10"
-        },
-        {
-            "title": "Archived Article 19",
-            "summary": "Summary of another archived article.",
-            "link": "#",
-            "date": "2023-10-05"
-        },
-        {
-            "title": "Archived Article 20",
-            "summary": "Summary of a previous archived article.",
-            "link": "#",
-            "date": "2023-09-01"
-        },
-        {
-            "title": "Archived Article 21",
-            "summary": "Summary of another archived article that was published earlier.",
-            "link": "#",
-            "date": "2023-08-25"
         }
     ]
 }
