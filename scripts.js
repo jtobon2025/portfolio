@@ -81,3 +81,15 @@ function moveSlide(n) {
     const width = slides[0].clientWidth;
     document.querySelector('.carousel-container').style.transform = `translateX(-${slideIndex * width}px)`;
 }
+document.getElementById('toggleArchivedButton').addEventListener('click', function () {
+    const archivedContainer = document.getElementById('archivedArticlesContainer');
+    
+    // Alternar la clase 'hidden' para mostrar u ocultar
+    if (archivedContainer.classList.contains('hidden')) {
+        archivedContainer.classList.remove('hidden');
+        this.textContent = 'Hide Archived Articles';
+    } else {
+        archivedContainer.classList.add('hidden');
+        this.textContent = 'Show Archived Articles';
+    }
+});
