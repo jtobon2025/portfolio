@@ -33,7 +33,6 @@
     <!-- Home Section -->
     <section id="home" class="home-section">
         <h2>Welcome to My Portfolio</h2>
-        <p></p>
         
         <!-- Carrusel de Imágenes -->
         <div class="carousel">
@@ -52,6 +51,14 @@
             <h3>Recent Articles</h3>
             <div class="articles-container" id="articles-container">
                 <!-- Los artículos se cargarán dinámicamente aquí desde el JSON -->
+            </div>
+
+            <!-- Botón para mostrar artículos archivados -->
+            <button id="toggleArchivedButton">Show Archived Articles</button>
+
+            <!-- Contenedor de artículos archivados -->
+            <div id="archivedArticlesContainer" class="hidden">
+                <!-- Artículos archivados se generarán dinámicamente aquí -->
             </div>
         </div>
     </section>
@@ -75,13 +82,6 @@
             </div>
         </div>
     </section>
-<!-- Botón para mostrar artículos archivados -->
-<button id="toggleArchivedButton">Show Archived Articles</button>
-
-<!-- Contenedor de artículos archivados -->
-<div id="archivedArticlesContainer" class="hidden">
-    <!-- Artículos archivados se generarán dinámicamente aquí -->
-</div>
 
     <!-- Footer -->
     <footer>
@@ -91,3 +91,4 @@
     <script src="scripts.js"></script>
 </body>
 </html>
+
