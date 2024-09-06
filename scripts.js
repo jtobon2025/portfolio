@@ -39,17 +39,43 @@ function loadArticles() {
 }
 
 // Función para crear un elemento de artículo
+
 function createArticleElement(article) {
     const articleElement = document.createElement('article');
     articleElement.classList.add('article');
     articleElement.innerHTML = `
         <h4>${article.title}</h4>
-        <p>${article.summary}</p>
+        <p>${article.summary.substring(0, 100)}...</p>
         <span class="date">Published on: ${article.date}</span>
-        <a href="${article.link}" class="read-more">Read More</a>
+        <button class="read-more" onclick="openModal('${article.title}', '${article.summary}', '${article.link}')">Read More</button>
     `;
     return articleElement;
 }
+
+// Función para abrir la ventana modal con el contenido del artículo
+function openModal(title, summary, link) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalSummary').textContent = summary;
+    document.getElementById('modalLink').href = link;
+    document.getElementById('articleModal').style.display = 'block';
+}
+
+// Función para cerrar la ventana modal
+function closeModal() {
+    document.getElementById('articleModal').style.display = 'none';
+}
+
+// Añadir evento al botón de cerrar la ventana modal
+document.querySelector('.close').onclick = closeModal;
+
+// Cerrar la ventana modal si se hace clic fuera del contenido de la modal
+window.onclick = function(event) {
+    const modal = document.getElementById('articleModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
 
 // Función para mostrar la sección seleccionada y ocultar las demás
 function showSection(sectionId) {
