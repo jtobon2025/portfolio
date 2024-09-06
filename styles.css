@@ -337,3 +337,24 @@ iframe {
     flex-direction: column;
     gap: 20px; /* Espacio entre cada sección */
 }
+.strengths-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: section;
+}
+
+.strengths-list li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    counter-increment: section;
+}
+
+.strengths-list li::before {
+    content: counter(section) ".";
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #007bff; /* Color distintivo para resaltar */
+}
