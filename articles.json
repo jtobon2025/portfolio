@@ -1,8 +1,8 @@
 {
     "current": [
         {
-            "title": "Current Article 1",
-            "summary": "Summary of the current article 1.",
+            "title": "cash flow",
+            "summary": "This project implements a complex class to analyze and project cash flow using historical data stored in a SQLite database",
             "link": "project-template.html",
             "date": "2024-09-05"
         },
@@ -33,8 +33,8 @@
     ],
     "archived": [
         {
-            "title": "Archived Article 1",
-            "summary": "Summary of an older article that is now archived.",
+            "title": "cash flow",
+            "summary": "This project implements a complex class to analyze and project cash flow using historical data stored in a SQLite database",
             "link": "#",
             "date": "2023-12-15"
         },
