@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <h1>Mi Nombre</h1>
+            <ul>
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" onclick="showSection('about')">About Me</a></li>
+                <li class="dropdown">
+                    <a href="#" onclick="showSection('projects')">Projects</a>
+                    <ul class="submenu">
+                        <li><a href="#project1">Project 1</a></li>
+                        <li><a href="#project2">Project 2</a></li>
+                        <li><a href="#project3">Project 3</a></li>
+                        <li><a href="#project4">Project 4</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="home-section">
+        <h2>Welcome to My Portfolio</h2>
+        <p></p>
+        
+        <!-- Carrusel de Imágenes -->
+        <div class="carousel">
+            <div class="carousel-container">
+                <img src="test4.jpg" alt="Image 1">
+                <img src="test3.jpg" alt="Image 2">
+                <img src="test4.jpg" alt="Image 3">
+            </div>
+            <!-- Controles del carrusel -->
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <!-- Sección de Artículos -->
+        <div class="articles-section">
+            <h3>Recent Articles</h3>
+            <div class="articles-container" id="articles-container">
+                <!-- Los artículos se cargarán dinámicamente aquí desde el JSON -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="about-section" style="display: none;">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <img src="1725216990356.jfif" alt="" class="profile-photo">
+            <div class="about-text">
+                <p>Systems Engineer and Full Stack Developer specializing in Corporate Finance Solutions and Information Management.</p>
+                <ul>
+                    <li><strong>Cash Budget Management System:</strong> Developed a comprehensive web solution using Python, HTML5, and JavaScript, enhancing cash flow control and forecasting.</li>
+                    <li><strong>Liquidity Risk Control in Desktop Applications:</strong> Implemented an efficient system with Python and PyQt5 for liquidity risk management.</li>
+                    <li><strong>Financial Dashboard Design:</strong> Created dashboards in QlikView and QlikSense.</li>
+                    <li><strong>Functional Consultant in Utility Systems:</strong> Participated in backend design and programming in Oracle with PL/SQL.</li>
+                    <li><strong>Cash Flow Forecast Models and Automation:</strong> Used Python libraries to create forecasting models and scenario simulations.</li>
+                    <li><strong>Portfolio and Goods Management Systems:</strong> Developed solutions with PyQt5 for financial portfolio management and goods handling.</li>
+                    <li><strong>Graphical Interface for Financial Charts:</strong> Integrated Python and Plotly for professional static and dynamic charts.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Mi Nombre. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
