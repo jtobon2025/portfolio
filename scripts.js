@@ -135,27 +135,3 @@ document.getElementById('hideArchivedButton').addEventListener('click', function
     document.getElementById('archivedArticlesContainer').classList.add('hidden'); // Ocultar los artículos
     this.classList.add('hidden'); // Ocultar el botón de ocultar todos
 });
-let currentLanguage = 'es'; // Idioma por defecto
-
-// Función para cambiar el idioma
-function changeLanguage(language) {
-    currentLanguage = language;
-    loadArticles(); // Recarga los artículos en el idioma seleccionado
-}
-
-// Función para cargar artículos desde el JSON
-function loadArticles() {
-    fetch('articles.json')
-        .then(response => response.json())
-        .then(data => {
-            const articlesContainer = document.getElementById('articles-container');
-            articlesContainer.innerHTML = ''; // Limpiar contenido anterior
-
-            data.current.forEach(article => {
-                const articleElement = createArticleElement(article);
-                articlesContainer.appendChild(articleElement);
-            });
-        })
-        .catch(error => console.error('Error loading articles:', error));
-}
-
