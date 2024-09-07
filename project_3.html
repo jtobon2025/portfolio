@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis and Optimization of an Investment Portfolio Using Machine Learning Models</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <h1>My Portfolio</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="project-content">
+        <h2>Optimization of Investment Portfolio Using Advanced Machine Learning Models and Dimensionality Reduction</h2>
+
+        <!-- Project Description Section -->
+        <section class="project-description">
+            <h3>Model Overview</h3>
+            <p class="spacer"></p> <!-- Aquí se añade un espacio en blanco -->
+            <p>The model highlights the use of advanced Machine Learning techniques, such as Random Forest and XGBoost, along with dimensionality reduction using PCA.</p>
+
+            <h4>Observations and Model Explanation</h4>
+            <ol>
+                <li><strong>Model Objective:</strong> The primary objective is to analyze historical asset data and optimize portfolio composition based on the investor's risk aversion and expected returns. This approach includes identifying patterns in data through Machine Learning techniques and applying mathematical models to adjust asset allocation.</li>
+                <li><strong>Feature Generation:</strong>
+                    <ul>
+                        <li><strong>RSI (Relative Strength Index):</strong> Used to measure the speed and change of price movements, helping to identify overbought or oversold conditions.</li>
+                        <li><strong>Mean Returns and Volatility:</strong> The mean and annualized volatility of returns are calculated, providing a basis for understanding the historical behavior of each asset.</li>
+                    </ul>
+                </li>
+                <li><strong>Machine Learning Model Training:</strong>
+                    <ul>
+                        <li><strong>RandomForestClassifier:</strong> Trained to predict whether an asset’s return will be positive or negative based on the generated technical features. The observed accuracy is modest, reflecting the complexity of predicting financial markets with historical data.</li>
+                        <li><strong>Data Imputation and Alignment:</strong> Any missing values are imputed, and features are aligned with the target to ensure consistent and accurate training.</li>
+                    </ul>
+                </li>
+                <li><strong>Portfolio Optimization:</strong>
+                    <ul>
+                        <li><strong>Efficient Frontier:</strong> Uses a mathematical optimization model to minimize portfolio volatility by adjusting asset weights. This technique maximizes risk-adjusted returns in line with the investor’s goals.</li>
+                        <li><strong>Capital Allocation:</strong> Capital is allocated to assets based on optimized weights, showing the number of shares to acquire for each asset.</li>
+                    </ul>
+                </li>
+                <li><strong>Performance Comparison:</strong>
+                    <ul>
+                        <li><strong>Benchmarks (QQQ and SPY):</strong> The model includes a comparison with benchmarks like QQQ and SPY, allowing evaluation of the strategy’s performance within a broader market context.</li>
+                    </ul>
+                </li>
+                <li><strong>Visualization and Reporting:</strong>
+                    <ul>
+                        <li><strong>Plotly:</strong> Interactive graphs are used to visualize cumulative portfolio returns and compare them with benchmarks, providing a visual tool for analysis.</li>
+                        <li><strong>QuantStats:</strong> Generates detailed reports that provide an exhaustive analysis of the portfolio strategy, including key metrics such as Sharpe ratio, drawdown, and risk-return profiles.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h4>Conclusions and Considerations</h4>
+            <ul>
+                <li><strong>Model as a Support Tool:</strong> This approach should be considered a decision-support tool, not a definitive formula. Predictive models in finance have limitations due to the inherent volatility and uncertainty of the market.</li>
+                <li><strong>Importance of Human Analysis:</strong> Although Machine Learning models provide valuable insights, they should always be complemented with fundamental and technical analysis performed by experts.</li>
+                <li><strong>Risk Management and Flexibility:</strong> The ability to adjust the strategy in response to market changes is crucial. The optimization approach seeks to balance risk and reward but does not eliminate the need for active and careful management.</li>
+            </ul>
+            <p>This model provides a good approach for combining advanced data analysis techniques and portfolio optimization, but it should always be used cautiously and in conjunction with human experience and judgment.</p>
+        </section>
+
+        <!-- Section for Plotly Graphs -->
+        <div id="graph-container">
+            <!-- First Graph -->
+            <iframe src="cumulative_returns_plot.html" width="100%" height="500px" style="border:none;"></iframe>
+
+            <!-- Second Graph -->
+            <iframe src="quantstats_report.html" width="100%" height="500px" style="border:none;"></iframe>
+
+        </div>
+
+        <!-- Link to View the Code -->
+        <p><a href="code_1.html">View Code</a></p>
+
+        <!-- Button to Return to Home -->
+        <a href="index.html" class="back-button">Return to Home</a>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Jorge Tobón. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
