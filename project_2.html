@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis and Optimization of an Investment Portfolio Using Machine Learning Models</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <h1>My Portfolio</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="project-content">
+        <h2>Analysis and Optimization of an Investment Portfolio Using Machine Learning Models</h2>
+
+        <!-- Project Description Section -->
+        <section class="project-description">
+            <h3>Project Overview</h3>
+            <p>The main objective is to build a model capable of analyzing historical data of financial assets and optimizing an investment portfolio using advanced machine learning techniques and mathematical optimization. The process includes asset selection, training of predictive models, and portfolio optimization based on risk and expected return.</p>
+
+            <h4>Methodology</h4>
+            <ol>
+                <li><strong>Initial Setup and Data Collection:</strong>
+                    <ul>
+                        <li>Investor parameters were requested: investment amount, expected return, and risk aversion level.</li>
+                        <li>Historical adjusted price data was downloaded for a selected list of assets, limited to the last 5 years to improve computational efficiency.</li>
+                    </ul>
+                </li>
+                <li><strong>Technical Feature Generation:</strong>
+                    <ul>
+                        <li><strong>RSI (Relative Strength Index):</strong> Measures the speed and change of price movements, used to identify overbought or oversold conditions.</li>
+                        <li><strong>MACD (Moving Average Convergence Divergence):</strong> Helps identify changes in the direction, strength, momentum, and duration of a trend in an asset's price.</li>
+                        <li><strong>Stochastic Oscillator:</strong> Compares an asset's closing price with its price range over a specified period, helping to identify potential reversal points.</li>
+                    </ul>
+                </li>
+                <li><strong>Training of Machine Learning Models:</strong>
+                    <ul>
+                        <li><strong>RandomForestClassifier</strong> and <strong>XGBoostClassifier</strong> were trained to predict whether an asset’s return would be positive or negative based on the generated technical features.</li>
+                        <li><strong>Dimensionality Reduction with PCA:</strong> Applied to reduce noise and retain only the most relevant features, speeding up the model training process.</li>
+                        <li><strong>Results:</strong> Despite adjustments, both models showed low accuracy, highlighting the inherent complexity and uncertainty of financial markets.</li>
+                    </ul>
+                </li>
+                <li><strong>Portfolio Optimization:</strong>
+                    <ul>
+                        <li>The <strong>Efficient Frontier</strong> model was used to minimize portfolio volatility by adjusting asset weights.</li>
+                        <li>Capital allocation was performed according to optimized weights to maximize risk-adjusted returns, based on the investor’s expected return.</li>
+                    </ul>
+                </li>
+                <li><strong>Results Visualization and Reporting:</strong>
+                    <ul>
+                        <li>The cumulative returns of the strategy were compared with benchmarks <strong>QQQ</strong> and <strong>SPY</strong> to assess the performance of the optimized portfolio.</li>
+                        <li>Graphs were generated using <strong>Plotly</strong> to provide an interactive and comprehensible view of the strategy’s evolution compared to reference indices.</li>
+                        <li><strong>QuantStats:</strong> Used for generating detailed performance reports, comparing the portfolio strategy against market benchmarks, and providing comprehensive analytics on the strategy's performance, including metrics like Sharpe ratio, drawdown, and risk-return profiles.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <!-- Disclaimer Section -->
+            <h4>Disclaimer</h4>
+            <p>The following conclusions and observations highlight the limitations and appropriate use of the Machine Learning model applied in portfolio optimization:</p>
+            <ul>
+                <li><strong>Uncertainty and Complexity:</strong> Predictive models in finance, such as those used in this project, do not guarantee high accuracy due to the unpredictable nature of the market. The low precision emphasizes the need to complement any automated strategy with careful and thoughtful analysis.</li>
+                <li><strong>Complementary Use of Models:</strong> While Machine Learning models provide valuable insights, they should not be the sole basis of an investment strategy. It is essential to combine these results with fundamental and technical analysis for a comprehensive market view.</li>
+                <li><strong>Risk Management and Flexibility:</strong> The flexibility to adjust the strategy and the ability to manage risk according to changing market conditions are more crucial than the pursuit of a perfect predictive formula.</li>
+            </ul>
+            <p>This model should be considered a decision-support tool rather than a standalone investment recommendation. Historical and simulated results do not guarantee future performance. It is vital to conduct thorough analysis and consult with a financial advisor before making investment decisions.</p>
+        </section>
+
+        <!-- Section for Plotly Graphs -->
+        <div id="graph-container">
+            <!-- First Graph -->
+            <iframe src="cumulative_returns_plot.html" width="100%" height="500px" style="border:none;"></iframe>
+
+            <!-- Second Graph -->
+            <iframe src="saldo_proyectaquantstats_report.html" width="100%" height="500px" style="border:none;"></iframe>
+
+        </div>
+
+        <!-- Button to Return to Home -->
+        <a href="index.html" class="back-button">Return to Home</a>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Jorge Tobón. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
