@@ -13,10 +13,10 @@
             "date": "2024-08-20"
         },
         {
-            "title": "Current Article 3",
-            "summary": "Summary of the current article 3.",
-            "link": "#",
-            "date": "2024-08-15"
+            "title": "Optimization of Investment Portfolio Using Advanced Machine Learning Models and Dimensionality Reduction",
+            "summary": "The model highlights the use of advanced Machine Learning techniques, such as Random Forest and XGBoost, along with dimensionality reduction using PCA",
+            "link": "project_3.html",
+            "date": "2024-07-08"
         },
         {
             "title": "Current Article 4",
