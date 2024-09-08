@@ -1,64 +1,64 @@
 {
     "current": [
         {
-            "title": "Dynamic Projected Cash Flow Chart",
-            "summary": "This project implements a complex class to analyze and project cash flow using historical data stored in a SQLite database",
+            "title": "Dynamic Projected Cash Flow Analysis",
+            "summary": "This project implements a complex class to analyze and project cash flows using historical data stored in a SQLite database, providing dynamic insights into cash management.",
             "link": "project-template.html",
             "date": "2024-09-05"
         },
         {
             "title": "Analysis and Optimization of an Investment Portfolio Using Machine Learning Models",
-            "summary": "The main objective is to build a model capable of analyzing historical data of financial assets and optimizing an investment portfolio using advanced machine learning techniques ",
+            "summary": "This project focuses on building a model capable of analyzing historical financial asset data and optimizing an investment portfolio using advanced techniques, including Efficient Frontier and Sharpe Ratio calculations.",
             "link": "project_2.html",
             "date": "2024-08-20"
         },
         {
-            "title": "Optimization of Investment Portfolio Using Advanced Machine Learning Models and Dimensionality Reduction",
-            "summary": "The model highlights the use of advanced Machine Learning techniques, such as Random Forest and XGBoost, along with dimensionality reduction using PCA",
+            "title": "Investment Portfolio Optimization with Machine Learning and PCA",
+            "summary": "This model emphasizes the use of advanced Machine Learning techniques, such as Random Forest and XGBoost, along with dimensionality reduction using PCA to enhance portfolio optimization.",
             "link": "project_3.html",
             "date": "2024-07-08"
         },
         {
-            "title": "Here’s a detailed academic exercise on Analysis and Optimization of an Investment Portfolio Using Financial Models",
-            "summary": "including all the steps, explanations, and formulas used throughout the process.",
+            "title": "Detailed Academic Exercise on Portfolio Analysis Using Financial Models",
+            "summary": "This project includes all steps, explanations, and formulas used throughout the process, providing a comprehensive academic approach to portfolio analysis and optimization.",
             "link": "project_4.html",
             "date": "2024-07-30"
         },
         {
             "title": "Current Article 5",
-            "summary": "Summary of the current article 5.",
+            "summary": "An in-depth summary of the latest insights on investment strategies and financial models.",
             "link": "#",
             "date": "2024-07-10"
         }
     ],
     "archived": [
         {
-            "title": "cash flow",
-            "summary": "This project implements a complex class to analyze and project cash flow using historical data stored in a SQLite database",
+            "title": "Historical Cash Flow Analysis Project",
+            "summary": "A detailed analysis and projection of cash flows using historical data stored in SQLite, highlighting trends and anomalies over time.",
             "link": "#",
             "date": "2023-12-15"
         },
         {
-            "title": "Archived Article 2",
-            "summary": "Summary of another older article that is now archived.",
+            "title": "Archived Investment Strategy Analysis",
+            "summary": "A review of past investment strategies, focusing on their effectiveness and areas of improvement based on historical performance data.",
             "link": "#",
             "date": "2023-11-10"
         },
         {
-            "title": "Archived Article 3",
-            "summary": "Summary of another archived article.",
+            "title": "Archived Machine Learning Portfolio Optimization",
+            "summary": "Explores the use of Machine Learning models to optimize portfolios, comparing outcomes with traditional financial metrics.",
             "link": "#",
             "date": "2023-10-05"
         },
         {
-            "title": "Archived Article 4",
-            "summary": "Summary of a previous archived article.",
+            "title": "Archived Article on Financial Modeling Techniques",
+            "summary": "An overview of financial modeling techniques applied to investment portfolios, emphasizing risk and return optimization.",
             "link": "#",
             "date": "2023-09-01"
         },
         {
-            "title": "Archived Article 5",
-            "summary": "Summary of another archived article that was published earlier.",
+            "title": "Archived Insights on Market Analysis",
+            "summary": "Archived article providing insights into market trends and analysis, highlighting significant findings from past studies.",
             "link": "#",
             "date": "2023-08-25"
         }
