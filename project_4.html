@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis and Optimization of an Investment Portfolio Using Financial Models</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- MathJax para renderizar las fórmulas matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <h1>My Portfolio</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="project-content">
+        <h2>Optimization of Investment Portfolio Using Financial Models and Quantitative Analysis</h2>
+
+        <!-- Project Description Section -->
+        <section class="project-description">
+            <h3>Model Overview</h3>
+            <p>The model utilizes a combination of quantitative financial techniques and optimization methods to analyze and enhance portfolio performance.</p>
+
+            <h4>Objectives and Model Explanation</h4>
+            <ol>
+                <li><strong>Model Objective:</strong> To optimize the composition of an investment portfolio based on historical asset performance, expected returns, and risk levels. This approach uses mathematical models to balance risk and reward in line with the investor’s goals.</li>
+                <li><strong>Key Financial Metrics and Formulas:</strong>
+                    <ul>
+                        <li><strong>Returns Calculation:</strong> Measures the percentage change in asset prices over time.
+                            <p>\[
+                            R_t = \frac{P_t - P_{t-1}}{P_{t-1}}
+                            \]</p>
+                        </li>
+                        <li><strong>Mean Returns:</strong> Average returns over a given period, providing a sense of an asset’s historical performance.
+                            <p>\[
+                            \mu = \frac{1}{N} \sum_{i=1}^{N} R_i
+                            \]</p>
+                        </li>
+                        <li><strong>Volatility (Standard Deviation):</strong> Represents the dispersion of returns, used as a risk measure.
+                            <p>\[
+                            \sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (R_i - \mu)^2}
+                            \]</p>
+                        </li>
+                        <li><strong>Sharpe Ratio:</strong> Evaluates the risk-adjusted performance by comparing mean returns with volatility.
+                            <p>\[
+                            SR = \frac{\mu - R_f}{\sigma}
+                            \]</p>
+                        </li>
+                        <li><strong>Efficient Frontier Optimization:</strong> Minimizes portfolio volatility through asset weight adjustments.
+                            <p>\[
+                            \min \sigma_p^2 = w^T S w
+                            \]</p>
+                            <p>Subject to:</p>
+                            <p>\(\sum w_i = 1\) and \(w_i \geq 0\)</p>
+                        </li>
+                        <li><strong>Cumulative Returns:</strong> Shows the total return over time by compounding individual returns.
+                            <p>\[
+                            C_t = (1 + R_1) \times (1 + R_2) \times \ldots \times (1 + R_t)
+                            \]</p>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Portfolio Optimization Process:</strong>
+                    <ul>
+                        <li>Historical data is cleaned and preprocessed to ensure quality inputs.</li>
+                        <li>Weights are optimized using Efficient Frontier techniques to minimize volatility.</li>
+                    </ul>
+                </li>
+                <li><strong>Performance Comparison:</strong>
+                    <ul>
+                        <li>Compares the optimized portfolio’s performance against market benchmarks like the S&P 500 to assess strategy effectiveness.</li>
+                    </ul>
+                </li>
+                <li><strong>Visualization and Reporting:</strong>
+                    <ul>
+                        <li><strong>Plotly:</strong> Interactive graphs illustrate portfolio weights and cumulative returns against benchmarks.</li>
+                        <li><strong>QuantStats:</strong> Generates detailed reports covering key performance metrics, such as Sharpe ratio and drawdowns.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h4>Conclusions and Considerations</h4>
+            <ul>
+                <li><strong>Support Tool:</strong> The model should be seen as a support tool rather than a definitive guide. Market unpredictability means that no model can guarantee success.</li>
+                <li><strong>Importance of Human Insight:</strong> While advanced models provide valuable data-driven insights, they must be complemented by expert analysis.</li>
+                <li><strong>Risk Management:</strong> Continuous strategy adjustments are essential to balance risk and return effectively.</li>
+            </ul>
+            <p>This approach offers a robust framework for merging financial modeling and portfolio optimization, but prudent use and expert evaluation remain key.</p>
+        </section>
+
+        <!-- Section for Plotly Graphs -->
+        <div id="graph-container">
+            <!-- First Graph -->
+            <iframe src="portfolio_weights_distribution.html" width="100%" height="500px" style="border:none;"></iframe>
+
+            <!-- Second Graph -->
+            <iframe src="portfolio_analysis.html" width="100%" height="500px" style="border:none;"></iframe>
+
+        </div>
+
+        <!-- Link to View the Code -->
+        <p><a href="code_1.html">View Code</a></p>
+
+        <!-- Button to Return to Home -->
+        <a href="index.html" class="back-button">Return to Home</a>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Jorge Tobón. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
