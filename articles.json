@@ -25,10 +25,10 @@
             "date": "2024-07-30"
         },
         {
-            "title": "Current Article 5",
-            "summary": "An in-depth summary of the latest insights on investment strategies and financial models.",
-            "link": "#",
-            "date": "2024-07-10"
+            "title": "AI-Based Financial Alert System for Identifying Investment Opportunities",
+            "summary": "Project aims to develop an advanced tool that leverages artificial intelligence and data analysis to alert investors of potential opportunities in the financial market. By combining machine learning techniques, natural language processing (NLP), and time series analysis",
+            "link": "project_5.html",
+            "date": "2024-05-10"
         }
     ],
     "archived": [
