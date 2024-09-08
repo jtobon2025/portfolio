@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Based Financial Alert System for Identifying Investment Opportunities</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- MathJax para renderizar las fórmulas matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <h1>My Portfolio</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="project-content">
+        <h2>AI-Based Financial Alert System for Identifying Investment Opportunities</h2>
+
+        <!-- Project Description Section -->
+        <section class="project-description">
+            <h3>Executive Summary</h3>
+            <p>The "AI-Based Financial Alert System for Identifying Investment Opportunities" project aims to develop an advanced tool that leverages artificial intelligence and data analysis to alert investors of potential opportunities in the financial market. The estimated development time for this project is 3 months with a team of 5 professionals. By combining machine learning techniques, natural language processing (NLP), and time series analysis, the system is designed to detect historical patterns and shifts in market sentiment that could precede significant price movements in financial assets.</p>
+
+            <h4>Project Objectives</h4>
+            <ol>
+                <li><strong>Pattern and Anomaly Detection:</strong> Identify signals in historical data that indicate buying or selling opportunities.</li>
+                <li><strong>Market Sentiment Analysis:</strong> Use NLP to evaluate news, social media, and other content related to financial assets.</li>
+                <li><strong>Real-Time Alerts:</strong> Develop a notification system that informs users of detected opportunities.</li>
+                <li><strong>Strategy Evaluation and Optimization:</strong> Measure the performance of suggested strategies and adjust models to improve accuracy.</li>
+            </ol>
+
+            <h4>Detailed Plan for Developing the AI-Based Financial Alert System</h4>
+            <ul>
+                <li><strong>Phase 1: Project Definition and Design</strong>
+                    <ul>
+                        <li>Specific Objectives: Define alert types, covered markets (stocks, cryptocurrencies, bonds), and target users.</li>
+                        <li>Functional and Non-Functional Requirements:
+                            <ul>
+                                <li>Functional: Real-time notifications, sentiment analysis, pattern and anomaly detection.</li>
+                                <li>Non-Functional: Scalability, security, fast response times, continuous availability.</li>
+                            </ul>
+                        </li>
+                        <li>Feasibility and Risk Analysis: Assess technical and economic feasibility, and identify potential risks.</li>
+                    </ul>
+                </li>
+                <li><strong>Phase 2: Data Acquisition and Preparation</strong>
+                    <ul>
+                        <li>Data Sources:
+                            <ul>
+                                <li>Market Data: APIs from Yahoo Finance, Alpha Vantage, FRED.</li>
+                                <li>News and Social Media: APIs from Twitter, Reddit, Google News.</li>
+                                <li>Volume and Order Data: Transaction volume and order flow data.</li>
+                            </ul>
+                        </li>
+                        <li>Data Preprocessing:
+                            <ul>
+                                <li>Cleaning and correcting erroneous values.</li>
+                                <li>Feature Engineering: Creating moving averages, volatility, RSI, MACD.</li>
+                                <li>Normalization and scaling for machine learning models.</li>
+                            </ul>
+                        </li>
+                        <li>Data Storage: Database (PostgreSQL, MongoDB) with table schemas for efficient queries.</li>
+                    </ul>
+                </li>
+                <li><strong>Phase 3: Development of AI and Machine Learning Models</strong>
+                    <ul>
+                        <li>Pattern and Anomaly Detection Models:
+                            <ul>
+                                <li>Supervised Models: Random Forest, XGBoost, SVM.</li>
+                                <li>Unsupervised Models: Isolation Forests, Autoencoders.</li>
+                            </ul>
+                        </li>
+                        <li>Sentiment Analysis: Implement NLP with spaCy or NLTK for tokenization and tone analysis.</li>
+                        <li>Model Validation and Optimization:
+                            <ul>
+                                <li>Validate models with training and test datasets.</li>
+                                <li>Hyperparameter optimization using Grid Search or Random Search.</li>
+                            </ul>
+                        </li>
+                        <li>Model Integration: ML pipeline that integrates all models and generates alerts.</li>
+                    </ul>
+                </li>
+                <li><strong>Phase 4: Development of User Interface and Notification System</strong>
+                    <ul>
+                        <li>User Interface Design: Create mockups for a web or mobile application.</li>
+                        <li>Frontend Development:
+                            <ul>
+                                <li>Use frameworks like React or Angular.</li>
+                                <li>Interactive charts with Plotly or D3.js.</li>
+                            </ul>
+                        </li>
+                        <li>Notification System: Push notifications, email alerts, or SMS.</li>
+                        <li>Backend and Model Integration: RESTful APIs to connect the frontend with the backend and AI models.</li>
+                    </ul>
+                </li>
+                <li><strong>Phase 5: System Testing and Validation</strong>
+                    <ul>
+                        <li>Functionality Testing: Unit, integration, and system testing.</li>
+                        <li>Load and Scalability Testing: Evaluate performance under different workloads.</li>
+                        <li>Security Testing: Implement measures against SQL injections and unauthorized access.</li>
+                    </ul>
+                </li>
+                <li><strong>Phase 6: Deployment and Maintenance</strong>
+                    <ul>
+                        <li>System Deployment: Deploy in cloud environments like AWS, Google Cloud, or Azure.</li>
+                        <li>Training and Documentation: Provide manuals and guides for users and administrators.</li>
+                        <li>Maintenance and Updates: Continuous monitoring and model adjustments.</li>
+                    </ul>
+                </li>
+                <li><strong>Phase 7: Continuous Evaluation and Improvement</strong>
+                    <ul>
+                        <li>Performance Evaluation: Analyze the accuracy and utility of generated alerts.</li>
+                        <li>Model and Data Updates: Adjust models and update data sources to maintain relevance.</li>
+                        <li>Expansion of Features: Explore new markets and asset types.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Success Indicators</h4>
+            <ul>
+                <li><strong>Alert Accuracy:</strong> Compare against benchmarks to measure system effectiveness.</li>
+                <li><strong>Response Times:</strong> Measure latency from detection to notification.</li>
+                <li><strong>User Satisfaction:</strong> Continuous feedback collection for adjustments and improvements.</li>
+            </ul>
+
+            <h4>Visualizations and Schematics</h4>
+            <ul>
+                <li><strong>System Architecture - confidential:</strong> Flowchart showing the interaction between data sources, AI models, and users.</li>
+                <li><strong>Data Flow:- confidential</strong> Diagram illustrating the integration of market data, sentiment analysis, and alert generation.</li>
+            </ul>
+
+            <h4>Conclusion</h4>
+            <p>This project provides a comprehensive and structured approach to developing an advanced financial alert system. By combining AI techniques, NLP, and time series analysis, the system aims to identify opportunities and support decision-making for investors. Continuous improvement and adaptability will be key to maintaining the system's relevance in a constantly changing financial market.</p>
+        </section>
+
+        <!-- Button to Return to Home -->
+        <a href="index.html" class="back-button">Return to Home</a>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Jorge Tobón. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
