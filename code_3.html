@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Code Display</title>
+    <!-- Including Highlight.js and its theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h1>Dynamic Projected Cash Flow Analysis</h1>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Python Code</h2>
+
+        <!-- Code Block -->
+        <pre><code class="language-python">
+# -*- coding: utf-8 -*-
+"""
+import pandas as pd
+import plotly.graph_objects as go
+import plotly.io as pio
+import sqlite3
+import webbrowser
+from flask import Flask, jsonify, request, send_file
+import logging
+import os
+import numpy as np
+import traceback
+
+class AdvancedCashFlowAnalyzer:
+    def __init__(self, db_path):
+        # Initialization
+        self.db_path = db_path
+        self.combine_html = True
+        self.decimal_units = 1
+        self.min_cash_value = 0
+        self.show_trendline = True
+        self.plot_type = "Line"
+        self.decimal_description = {1: 'units', 1000: 'thousands', 1000000: 'millions', 1000000000: 'billions'}
+        self.fig = None
+        self.df = pd.DataFrame()
+        self.df_report = pd.DataFrame()
+        self.df_comparison = pd.DataFrame()
+        self.assumptions_df = pd.DataFrame()  # Initialize with an empty DataFrame
+        self.process_second_file = False
+        self.levels = []
+        self.levels_1 = []
+        self.assumptions_levels = []  # Store assumptions levels
+        self.start_date = None
+        self.end_date = None
+        self.line_color1 = 'blue'
+        self.line_color2 = 'green'
+        self.currency_var = 'EXP USD'  # Default value, can be overwritten later
+
+    def process_assumptions(self, assumptions_df):
+        """
+        Processes the assumptions DataFrame and integrates it into the analysis.
+        """
+        self.assumptions_df = assumptions_df
+
+    def get_levels(self, report_date, comparison_date):
+        try:
+            conn = sqlite3.connect(self.db_path)
+            query_1 = "SELECT DISTINCT level1 FROM historical_data WHERE report_date = ?"
+            query_2 = "SELECT DISTINCT level1 FROM historical_data WHERE report_date = ?"
+            
+            levels_report_date = pd.read_sql_query(query_1, conn, params=(report_date,))
+            levels_comparison_date = pd.read_sql_query(query_2, conn, params=(comparison_date,))
+            
+            # Filter null values
+            levels_report_date = levels_report_date['level1'].dropna().unique()
+            levels_comparison_date = levels_comparison_date['level1'].dropna().unique()
+            
+            combined_levels = pd.concat([pd.Series(levels_report_date), pd.Series(levels_comparison_date)]).unique()
+            self.levels_1 = levels_report_date
+            
+            conn.close()
+            
+            logging.info(f"levels_1: {self.levels_1}")
+            logging.info(f"Combined levels: {combined_levels}")
+            
+            return combined_levels.tolist()
+        except Exception as e:
+            logging.error(f"Error obtaining levels: {e}")
+            return []
+
+    def generate_chart(self, report_date, comparison_date, start_date, end_date, levels, currencies, min_cash, decimal_units, report_balance_color, comparison_balance_color, combine_charts, chart_type, trendline, trace_level1):
+        self.combine_html = combine_charts  # Assign the received value to the class variable
+        self.decimal_units = decimal_units
+        self.min_cash_value = min_cash
+        self.line_color2 = comparison_balance_color
+        self.line_color1 = report_balance_color
+        self.plot_type = chart_type
+        self.currency_var = currencies[0]
+        self.show_trendline = trendline
+        self.trace_level1 = trace_level1
+
+        try:
+            conn = sqlite3.connect(self.db_path)
+            query = """
+            SELECT level0, level1, date, source_currency, payment_currency, value_usd, value_source, value_payment, business, report_date
+            FROM historical_data
+            WHERE report_date = ?
+            """
+            df_report = pd.read_sql_query(query, conn, params=(report_date,))
+            logging.info(f"Report data obtained: {df_report.head()}")
+
+            if comparison_date:
+                df_comparison = pd.read_sql_query(query, conn, params=(comparison_date,))
+                logging.info(f"Comparison data obtained: {df_comparison.head()}")
+            else:
+                df_comparison = pd.DataFrame()
+                logging.info("No comparison date provided, comparison DataFrame is empty.")
+
+            conn.close()
+
+            # Filter by selected levels
+            df_report = df_report[df_report['level1'].isin(levels)]
+            logging.info(f"Report data after filtering by levels: {df_report.head()}")
+
+            if not df_comparison.empty:
+                df_comparison = df_comparison[df_comparison['level1'].isin(levels)]
+                logging.info(f"Comparison data after filtering by levels: {df_comparison.head()}")
+                self.process_second_file = True
+
+            # Ensure dates are in the correct format for the 'date' column
+            df_report['date'] = pd.to_datetime(df_report['date'], format="%Y-%m-%d")
+            if not df_comparison.empty:
+                df_comparison['date'] = pd.to_datetime(df_comparison['date'], format="%Y-%m-%d")
+
+            # Convert start_date and end_date to the correct format
+            start_date_dt = pd.to_datetime(start_date, format="%Y-%m-%d")
+            end_date_dt = pd.to_datetime(end_date, format="%Y-%m-%d")
+
+            df_report = df_report[(df_report['date'] >= start_date_dt) & (df_report['date'] <= end_date_dt)]
+            logging.info(f"Report data after filtering by dates: {df_report.head()}")
+
+            if not df_comparison.empty:
+                df_comparison = df_comparison[(df_comparison['date'] >= start_date_dt) & (df_comparison['date'] <= end_date_dt)]
+                logging.info(f"Comparison data after filtering by dates: {df_comparison.head()}")
+
+            # Integrate the assumptions data
+            if not self.assumptions_df.empty:
+                # Filter by dates
+                self.assumptions_df['date'] = pd.to_datetime(self.assumptions_df['date'], format="%Y-%m-%d")
+                
+                filtered_assumptions = self.assumptions_df[(self.assumptions_df['date'] >= start_date_dt) & (self.assumptions_df['date'] <= end_date_dt)]
+                
+                logging.info(f"Filtered ASSUMPTIONS data: {filtered_assumptions.head(10)}")
+                # Adjust the report DataFrame with the assumptions data
+                
+                # Select only the columns common to both DataFrames
+                common_columns = df_report.columns.intersection(filtered_assumptions.columns)
+                filtered_assumptions_df = filtered_assumptions[common_columns]
+                
+                df_report = pd.concat([df_report, filtered_assumptions_df], ignore_index=True)
+                unique_levels_df_report = df_report['level1'].unique()
+                self.assumptions_levels = unique_levels_df_report  # Store assumptions levels
+                
+                logging.info(f"Report data after integrating assumptions: {df_report.head(100)}")
+                logging.info(f"Report data after integrating assumptions COLUMNS: {df_report.columns}")
+                if not df_comparison.empty:
+                    report_date_comparison = df_comparison['report_date'].iloc[0]
+                    filtered_assumptions_df['report_date'] = report_date_comparison
+                    df_comparison = pd.concat([df_comparison, filtered_assumptions_df], ignore_index=True)
+                    unique_levels_df_comparison = df_comparison['level1'].unique()
+                    logging.info(f"Assumptions data for comparison: {filtered_assumptions_df.head(10)}")
+                    logging.info(f"Comparison data after integrating assumptions: {df_comparison.head(1000)}")
+                    self.assumptions_levels = pd.concat([pd.Series(self.assumptions_levels), pd.Series(unique_levels_df_comparison)]).unique()
+
+            # Default list of currencies
+            if not currencies:
+                currencies = ['EXP USD', 'USD', 'EUR']
+
+            self.df_report = df_report
+            self.df_comparison = df_comparison
+
+            return df_report, df_comparison
+
+        except Exception as e:
+            logging.error(f"Error during database selection: {e}")
+            logging.error(traceback.format_exc())
+            return None, None
+
+    def combine_levels(self):
+        if hasattr(self, 'levels') and hasattr(self, 'assumptions_levels'):
+            self.combined_levels = pd.concat([pd.Series(self.levels), pd.Series(self.assumptions_levels)]).unique()
+            logging.info(f"Combined levels: {self.combined_levels}")
+            return self.combined_levels.tolist()
+        else:
+            return []
+
+    def calculate(self):
+        try:
+            logging.info("Starting chart calculation.")
+            self.process_selected_data()
+            if self.process_second_file and not self.df_comparison.empty:
+                self.process_selected_data(second_file=True)
+        except Exception as e:
+            logging.error(f"Error calculating projected balance: {e}")
+
+    def process_selected_data(self, second_file=False):
+        try:
+            selected_level1_indices = self.combine_levels()
+            logging.info(f"Processing {'comparison' if second_file else 'report'} data.")
+            selected_level1 = [item for item in selected_level1_indices]
+            selected_currency = self.currency_var
+
+            # Filter start and end dates if present
+            if self.start_date and self.end_date:
+                self.start_date = pd.to_datetime(self.start_date)
+                self.end_date = pd.to_datetime(self.end_date)
+                if not second_file:
+                    self.df_report = self.df_report[(self.df_report['date'] >= self.start_date) & (self.df_report['date'] <= self.end_date)]
+                else:
+                    self.df_comparison = self.df_comparison[(self.df_comparison['date'] >= self.start_date) & (self.df_comparison['date'] <= self.end_date)]
+
+            df = self.df_comparison if second_file else self.df_report
+
+            if not df.empty and selected_level1:
+                decimal_factor = self.decimal_units
+                daily_balances, final_daily_balance, filtered_df, max_weight_income, max_weight_expense, value_column = self.process_data(df, selected_level1, decimal_factor, selected_currency, self.start_date, self.end_date)
+                if daily_balances is not None:
+                    df_cash_balance = self.update_balance(filtered_df, selected_currency, max_weight_income, max_weight_expense)
+                    self.plot_balance(daily_balances, filtered_df, selected_currency, max_weight_income, max_weight_expense, value_column, second_file)
+                else:
+                    logging.warning("Unable to calculate projected balance.")
+            else:
+                logging.warning("Select at least one Level1 value.")
+        except Exception as e:
+            logging.error(f"Error processing selected data: {e}")
+            logging.error(traceback.format_exc())
+
+    def process_data(self, df, selected_level1, decimal_factor, selected_currency, start_date, end_date):
+        try:
+            required_columns = ['level1', 'level0', 'date', 'value_usd', 'value_payment', 'payment_currency']
+            for col in required_columns:
+                if col not in df.columns:
+                    raise ValueError(f"Missing required column: {col}")
+
+            filtered_df = df[df['level1'].isin(selected_level1)]
+            if filtered_df.empty:
+                logging.info(f"selected_level1: {selected_level1}")
+                logging.info(f"First 5 rows of df: {df.head()}")
+                raise ValueError("The filtered DataFrame is empty after applying filters.")
+
+            # Apply date filters if start_date and end_date are present
+            if start_date and end_date:
+                start_date = pd.to_datetime(start_date)
+                end_date = pd.to_datetime(end_date)
+                filtered_df = filtered_df[(filtered_df['date'] >= start_date) & (filtered_df['date'] <= end_date)]
+                if filtered_df.empty:
+                    raise ValueError("The filtered DataFrame is empty after applying the date range.")
+
+            value_column = 'value_usd' if selected_currency == 'EXP USD' else 'value_payment'
+            if selected_currency != 'EXP USD':
+                filtered_df = filtered_df[filtered_df['payment_currency'] == selected_currency]
+                if filtered_df.empty:
+                    raise ValueError("The filtered DataFrame is empty after applying the currency filter.")
+
+            filtered_df = filtered_df.fillna({'level0': '', 'level1': '', 'date': pd.Timestamp('1900-01-01'), value_column: 0})
+            filtered_df[value_column] = pd.to_numeric(filtered_df[value_column], errors='coerce').fillna(0)
+            filtered_df['date'] = pd.to_datetime(filtered_df['date'], errors='coerce')
+
+            initial_balance = filtered_df.loc[(filtered_df['level0'] == 'initial balance'), value_column].sum() / decimal_factor
+            dates = pd.date_range(start=filtered_df['date'].min(), end=filtered_df['date'].max())
+            incomes = filtered_df.loc[filtered_df['level0'] == 'income'].groupby('date')[value_column].sum().reindex(dates, fill_value=0) / decimal_factor
+            expenses = filtered_df.loc[filtered_df['level0'] == 'expenses'].groupby('date')[value_column].sum().reindex(dates, fill_value=0) / decimal_factor
+
+            cash_balance = self.cash_flow(initial_balance, incomes, expenses, dates)
+            df_cash_balance = pd.DataFrame({'date': dates, 'Cash Balance': cash_balance, 'income': incomes, 'expenses': expenses})
+            df_cash_balance['Day'] = df_cash_balance['date'].dt.to_period('D')
+            final_daily_balance = df_cash_balance.groupby('Day')['Cash Balance'].last().reset_index()
+
+            grouped = filtered_df.groupby(['level0', 'level1', 'date']).agg({value_column: 'sum'}).reset_index()
+            total_level0_date = grouped.groupby(['level0', 'date'])[value_column].sum().reset_index()
+            total_level0_date = total_level0_date.rename(columns={value_column: 'Total_Level0_Date'})
+            grouped = grouped.merge(total_level0_date, on=['level0', 'date'])
+            grouped['Weight'] = (grouped[value_column] / grouped['Total_Level0_Date']) * 100
+
+            max_weight_item = grouped.loc[grouped.groupby(['level0', 'date'])['Weight'].idxmax()]
+            max_weight_item = max_weight_item[['date', 'level0', 'level1', 'Weight']].drop_duplicates(subset=['date', 'level0'])
+
+            max_weight_income = max_weight_item[max_weight_item['level0'] == 'income'][['date', 'level0', 'level1', 'Weight']]
+            max_weight_income = max_weight_income.rename(columns={'level1': 'Level1_Income', 'Weight': 'Weight_Income'})
+
+            max_weight_expense = max_weight_item[max_weight_item['level0'] == 'expenses'][['date', 'level0', 'level1', 'Weight']]
+            max_weight_expense = max_weight_expense.rename(columns={'level1': 'Level1_Expenses', 'Weight': 'Weight_Expenses'})
+
+            df_cash_balance = df_cash_balance.merge(max_weight_income, on=['date'], how='left')
+            df_cash_balance = df_cash_balance.merge(max_weight_expense, on=['date'], how='left')
+
+            df_cash_balance['Level1_Income'] = df_cash_balance['Level1_Income'].fillna('')
+            df_cash_balance['Weight_Income'] = df_cash_balance['Weight_Income'].fillna(0)
+            df_cash_balance['Level1_Expenses'] = df_cash_balance['Level1_Expenses'].fillna('')
+            df_cash_balance['Weight_Expenses'] = df_cash_balance['Weight_Expenses'].fillna(0)
+
+            return df_cash_balance, final_daily_balance, filtered_df, max_weight_income, max_weight_expense, value_column
+        except Exception as e:
+            logging.error(f"Error processing data: {e}")
+            logging.error(traceback.format_exc())
+            return None, None, None, None, None, None
+
+    def update_balance(self, filtered_df, selected_currency, max_weight_income, max_weight_expense):
+        try:
+            value_column = 'value_usd' if selected_currency == 'EXP USD' else 'value_payment'
+            if selected_currency != 'EXP USD':
+                filtered_df = filtered_df[filtered_df['payment_currency'] == selected_currency]
+                if filtered_df.empty:
+                    raise ValueError("The filtered DataFrame is empty after applying the currency filter.")
+
+            filtered_df = filtered_df.fillna({'level0': '', 'level1': '', 'date': pd.Timestamp('1900-01-01'), value_column: 0})
+            filtered_df[value_column] = pd.to_numeric(filtered_df[value_column], errors='coerce').fillna(0)
+
+            initial_balance = filtered_df.loc[(filtered_df['level0'] == 'initial balance'), value_column].sum() / self.decimal_units
+            if self.decimal_units <= 0:
+                raise ValueError("The decimal_units value must be greater than 0.")
+
+            dates = pd.date_range(start=filtered_df['date'].min(), end=filtered_df['date'].max())
+            incomes = filtered_df.loc[filtered_df['level0'] == 'income'].groupby('date')[value_column].sum().reindex(dates, fill_value=0) / self.decimal_units
+            expenses = filtered_df.loc[filtered_df['level0'] == 'expenses'].groupby('date')[value_column].sum().reindex(dates, fill_value=0) / self.decimal_units
+
+            cash_balance = self.euler_method(initial_balance, incomes, expenses, dates)
+            df_cash_balance = pd.DataFrame({'date': dates, 'Cash Balance': cash_balance, 'income': incomes, 'expenses': expenses})
+            df_cash_balance['Day'] = df_cash_balance['date'].dt.to_period('D')
+
+            df_cash_balance = df_cash_balance.merge(max_weight_income, on=['date'], how='left')
+            df_cash_balance = df_cash_balance.merge(max_weight_expense, on=['date'], how='left')
+
+            df_cash_balance['Level1_Income'] = df_cash_balance['Level1_Income'].fillna('')
+            df_cash_balance['Weight_Income'] = df_cash_balance['Weight_Income'].fillna(0)
+            df_cash_balance['Level1_Expenses'] = df_cash_balance['Level1_Expenses'].fillna('')
+            df_cash_balance['Weight_Expenses'] = df_cash_balance['Weight_Expenses'].fillna(0)
+
+            return df_cash_balance
+        except Exception as e:
+            logging.error(f"Error updating balance: {e}")
+            logging.error(traceback.format_exc())
+            return None
+
+    def cash_flow(self, C0, incomes, expenses, dates):
+        try:
+            cash_balance = [C0]
+            for i in range(1, len(dates)):
+                dt = (dates[i] - dates[i-1]) / np.timedelta64(1, 'D')
+                if dt < 0:
+                    raise ValueError(f"Negative time interval: dt={dt}, dates[i]={dates[i]}, dates[i-1]={dates[i-1]}")
+                balance = cash_balance[-1] + (incomes[i] - expenses[i]) * dt
+                cash_balance.append(balance)
+                
+            return cash_balance
+        except Exception as e:
+            logging.error(f"Error in euler_method: {str(e)}")
+            raise
+
+    def calculate_min_cash(self):
+        try:
+            min_cash = self.min_cash_value / self.decimal_units
+            df_cash_balance, _, _, _, _, _ = self.process_data(
+                self.df_report, [item for item in self.combine_levels()],
+                self.decimal_units, self.currency_var, None, None
+            )
+
+            if df_cash_balance is None or df_cash_balance.empty:
+                logging.warning("df_cash_balance is None or empty")
+                return None
+
+            total_funds_needed = 0
+            funds_per_month = {}
+            fig_min_cash = go.Figure()
+
+            i = 0
+            while i < len(df_cash_balance):
+                if df_cash_balance.at[i, 'Cash Balance'] < min_cash:
+                    adjust_date = df_cash_balance.at[i, 'date']
+                    required_amount = min_cash - df_cash_balance.at[i, 'Cash Balance']
+                    total_funds_needed += required_amount
+                    month_year = adjust_date.strftime('%Y-%m')
+
+                    if month_year in funds_per_month:
+                        funds_per_month[month_year]['amount'] += required_amount
+                        funds_per_month[month_year]['occurrences'] += 1
+                    else:
+                        funds_per_month[month_year] = {'amount': required_amount, 'occurrences': 1}
+
+                    # Adjust the balance from this point and recalculate
+                    new_balance = min_cash
+                    remaining_dates = df_cash_balance['date'].iloc[i:]
+                    remaining_incomes = df_cash_balance['income'].iloc[i:]
+                    remaining_expenses = df_cash_balance['expenses'].iloc[i:]
+
+                    try:
+                        new_balances = self.euler_method(new_balance, remaining_incomes.values, remaining_expenses.values, remaining_dates.values)
+                    except Exception as e:
+                        logging.error(f"Error in euler_method: {str(e)}")
+                        raise
+
+                    try:
+                        df_cash_balance.loc[i:, 'Cash Balance'] = new_balances
+                    except Exception as e:
+                        logging.error(f"Error updating df_cash_balance: {str(e)}")
+                        raise
+
+                i += 1
+
+            # Only add the final trace of adjusted balances
+            fig_min_cash.add_trace(go.Scatter(
+                x=df_cash_balance['date'],
+                y=df_cash_balance['Cash Balance'],
+                mode='lines',
+                name='Adjusted Balance',
+                line=dict(color='green')
+            ))
+
+            # Add bar traces for incomes and expenses
+            fig_min_cash.add_trace(go.Bar(
+                x=df_cash_balance['date'],
+                y=df_cash_balance['income'],
+                name='Income',
+                marker_color='green',
+                opacity=0.6
+            ))
+
+            fig_min_cash.add_trace(go.Bar(
+                x=df_cash_balance['date'],
+                y=df_cash_balance['expenses'],
+                name='Expenses',
+                marker_color='red',
+                opacity=0.6
+            ))
+
+            # Add the minimum cash line
+            fig_min_cash.add_trace(go.Scatter(
+                x=df_cash_balance['date'],
+                y=[min_cash] * len(df_cash_balance),
+                mode='lines',
+                name='Minimum Cash',
+                line=dict(color='orange', dash='dash')
+            ))
+
+            # Interactivity enhancements
+            fig_min_cash.update_layout(
+                title='Adjusted Balances to Maintain Minimum Cash',
+                xaxis_title='Date',
+                yaxis_title=f'Cash Balance ({self.currency_var})',
+                legend_title='Legend',
+                hovermode='x unified',
+                template='plotly_white',
+                barmode='overlay',  # Overlay bars
+                xaxis=dict(
+                    rangeselector=dict(
+                        buttons=list([
+                            dict(count=1, label='1m', step='month', stepmode='backward'),
+                            dict(count=6, label='6m', step='month', stepmode='backward'),
+                            dict(count=1, label='YTD', step='year', stepmode='todate'),
+                            dict(count=1, label='1y', step='year', stepmode='backward'),
+                            dict(step='all')
+                        ])
+                    ),
+                    rangeslider=dict(visible=True),
+                    type='date'
+                )
+            )
+
+            report_funds = f"Total funds required to keep the balance above the minimum cash: {total_funds_needed:,.2f}\n\n"
+            report_funds += "Additions needed per month:\n"
+
+            for month_year, values in funds_per_month.items():
+                report_funds += f"{month_year}: {values['amount']:,.2f} (Number of times: {values['occurrences']})\n"
+
+            logging.info(f"Funds Required: {report_funds}")
+            
+            html_filename = "required_funds.html"
+            html_content = pio.to_html(fig_min_cash, full_html=False)
+
+            with open(html_filename, "w", encoding="utf-8") as f:
+                f.write(html_content)
+            webbrowser.open(f"file://{os.path.abspath(html_filename)}")
+
+            return report_funds  # Return the report
+
+        except Exception as e:
+            logging.critical(f"Error calculating required funds: {e}")
+            print(f"Error detail: {str(e)}")
+            return None  # Return None if there is an error
+
+        </code></pre>
+    </main>
+    <a href="project_4.html" class="back-button">Return to Home</a>
+    <footer>
+        <p>© 2024 Jorge Tobón. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
