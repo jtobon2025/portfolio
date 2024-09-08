@@ -34,21 +34,8 @@
     "archived": [
         {
             "title": "Proposal for Managing a Dashboard with Power BI",
-            "summary": "{
-  "proposal": {
-    "title": "Proposal for Managing a Dashboard with Power BI",
-    "description": "This proposal presents an interactive dashboard designed in Power BI, focused on financial management and analysis. It includes key performance indicators such as revenue, expenses, profits, and margins, accompanied by detailed charts and tables that visualize performance by department, segment, and product. With interactive filters, users can customize the view for deeper analysis and make informed decisions. The intuitive and professional design is tailored to enhance user experience and maximize efficiency in strategic decision-making.",
-    "key_features": [
-      "Key indicators of revenue, expenses, profits, and margins.",
-      "Interactive charts for financial data visualization.",
-      "Detailed tables for analysis by department, segment, and item.",
-      "Dynamic filters for customizable views.",
-      "Professional design focused on decision-making."
-    ]
-  }
-}
-",
-            "link": "#",
+            "summary": "This proposal presents an interactive dashboard designed in Power BI, focused on financial management and analysis. It includes key performance indicators such as revenue, expenses, profits, and margins, accompanied by detailed charts and tables that visualize performance by department, segment, and product. With interactive filters, users can customize the view for deeper analysis and make informed decisions. The intuitive and professional design is tailored to enhance user experience and maximize efficiency in strategic decision-making.",
+            "link": "project_5.html",
             "date": "2023-12-15"
         },
         {
