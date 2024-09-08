@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Code Display</title>
+    <!-- Including Highlight.js and its theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h1>Optimization of Investment Portfolio Using Advanced Machine Learning Models and Dimensionality Reduction</h1>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Python Code</h2>
+
+        <!-- Code Block -->
+        <pre><code class="language-python">
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Sep 8 08:23:31 2024
+
+@author: ADMIN
+"""
+
+from fredapi import Fred
+import pandas as pd
+import yfinance as yf
+from pypfopt import EfficientFrontier, risk_models, expected_returns
+import plotly.graph_objects as go
+import os
+from sklearn.preprocessing import StandardScaler
+from scipy.stats.mstats import winsorize
+import numpy as np
+import quantstats as qs
+
+# Initialize FRED with your API Key
+fred = Fred(api_key='bb6617d87e675fe49d98bb996d7d45e4')
+
+# Download fixed income series (bond yields)
+fixed_income_tickers = ['DGS10', 'DGS2', 'DGS5']
+fixed_income_data = {ticker: fred.get_series(ticker) for ticker in fixed_income_tickers}
+fixed_income_df = pd.DataFrame(fixed_income_data)
+
+# Download equity data from Yahoo Finance
+equity_tickers = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'AMZN', 'NVDA', 'META']
+equities = yf.download(equity_tickers, start="2019-01-01", end="2024-09-06")['Adj Close']
+
+# Ensure both indexes are timezone-naive (no time zone info)
+fixed_income_df.index = fixed_income_df.index.tz_localize(None)
+equities.index = equities.index.tz_localize(None)
+
+# Adjust the date range to match between fixed income and equities
+common_start_date = max(equities.index.min(), fixed_income_df.index.min())
+common_end_date = min(equities.index.max(), fixed_income_df.index.max())
+
+# Filter series to start from the most recent common date
+equities = equities[(equities.index >= common_start_date) & (equities.index <= common_end_date)]
+fixed_income_df = fixed_income_df[(fixed_income_df.index >= common_start_date) & (fixed_income_df.index <= common_end_date)]
+
+# Impute missing values in fixed income using forward-fill and backward-fill
+fixed_income_df = fixed_income_df.fillna(method='ffill').fillna(method='bfill')
+
+# Calculate returns only for common and valid dates
+equity_returns = equities.pct_change().dropna()
+fixed_income_returns = fixed_income_df.pct_change().dropna()
+
+# Filter the top-performing stocks based on Sharpe Ratio
+mu_equities = expected_returns.mean_historical_return(equity_returns)
+S_equities = risk_models.sample_cov(equity_returns)
+
+# Calculate standard deviations of the returns
+std_devs = np.sqrt(np.diag(S_equities))
+sharpe_ratios = mu_equities / std_devs
+
+# Select the best-performing stocks
+top_assets = sharpe_ratios.nlargest(3).index.tolist()
+equities = equities[top_assets]
+equity_returns = equity_returns[top_assets]
+
+# Combine equity and fixed income data and review the data
+combined_returns = pd.concat([equity_returns, fixed_income_returns], axis=1).dropna()
+
+# Winsorize data to limit extreme values
+combined_returns = combined_returns.apply(lambda x: winsorize(x, limits=[0.01, 0.01]))
+
+# Validate and remove extreme, infinite, or anomalous values before optimization
+combined_returns = combined_returns.replace([float('inf'), -float('inf')], float('nan'))
+combined_returns.dropna(inplace=True)
+
+# Apply scaling to normalize the values
+scaler = StandardScaler()
+scaled_returns = pd.DataFrame(scaler.fit_transform(combined_returns), 
+                              index=combined_returns.index, 
+                              columns=combined_returns.columns)
+
+# Confirm that the data is clean and ready for optimization
+print("Review of NaN and infinite values after date adjustment:")
+print(scaled_returns.isna().sum())
+
+# Additional validation before `pypfopt` calculations
+print("Review prior to optimization:")
+print(scaled_returns.describe())
+
+# Check for issues in mean and covariance calculations
+try:
+    mu = expected_returns.mean_historical_return(scaled_returns, compounding=False)
+    S = risk_models.sample_cov(scaled_returns)
+except Exception as e:
+    print(f"Error calculating mean or covariance: {e}")
+    mu = pd.Series()  
+    S = pd.DataFrame()
+
+# Review values before optimization
+print("Mean returns for optimization:")
+print(mu)
+print("Covariance matrix for optimization:")
+print(S)
+
+# Proceed with optimization if there are no errors in mu or S
+if not mu.isna().any() and not S.isna().any().any():
+    ef = EfficientFrontier(mu, S)
+    ef.min_volatility()  
+    weights = ef.clean_weights()
+
+    print(weights)
+    # Calculate cumulative returns of the portfolio
+    portfolio_returns = scaled_returns[top_assets + fixed_income_tickers].dot(list(weights.values()))
+    portfolio_cumulative_returns = (1 + portfolio_returns).cumprod()
+    
+    # Create bar chart of portfolio weights distribution
+    bar_fig = go.Figure(data=[go.Bar(
+        x=list(weights.keys()),
+        y=list(weights.values()),
+        text=[f'{weight:.2%}' for weight in weights.values()],
+        textposition='outside',
+        marker=dict(color=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']),
+        hovertemplate='%{x}: %{y:.2%}<extra></extra>'
+    )])
+
+    bar_fig.update_layout(
+        title=dict(
+            text='Portfolio Weights Distribution (Bar Chart)',
+            font=dict(size=24, color='#ffffff'),
+            x=0.5
+        ),
+        xaxis=dict(
+            title='Assets',
+            tickangle=-45,
+            title_font=dict(size=18, color='#ffffff'),
+            tickfont=dict(size=14, color='#ffffff')
+        ),
+        yaxis=dict(
+            title='Weights',
+            title_font=dict(size=18, color='#ffffff'),
+            tickfont=dict(size=14, color='#ffffff')
+        ),
+        template='plotly_dark',
+        plot_bgcolor='#000000',
+        paper_bgcolor='#000000',
+        margin=dict(l=40, r=40, t=80, b=40)
+    )
+
+    # Create pie chart of portfolio weights distribution
+    pie_fig = go.Figure(data=[go.Pie(
+        labels=list(weights.keys()),
+        values=list(weights.values()),
+        hoverinfo='label+percent+value',
+        textinfo='percent',
+        hole=.4,
+        marker=dict(colors=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b'],
+                    line=dict(color='#000000', width=2))
+    )])
+
+    pie_fig.update_layout(
+        title=dict(
+            text='Portfolio Weights Distribution (Pie Chart)',
+            font=dict(size=24, color='#ffffff'),
+            x=0.5
+        ),
+        template='plotly_dark',
+        plot_bgcolor='#000000',
+        paper_bgcolor='#000000',
+        margin=dict(l=40, r=40, t=80, b=40)
+    )
+
+    # Comparison with Benchmark (S&P 500)
+    sp500 = yf.download('^GSPC', start=common_start_date, end=common_end_date)['Adj Close']
+    sp500_returns = sp500.pct_change().dropna()
+    combined_returns['Benchmark'] = sp500_returns
+
+    # Calculate cumulative returns
+    portfolio_cumulative_returns = (1 + combined_returns[top_assets + fixed_income_tickers].dot(list(weights.values()))).cumprod()
+    benchmark_cumulative_returns = (1 + combined_returns['Benchmark']).cumprod()
+
+    # Comparison graphs
+    comparison_fig = go.Figure()
+    comparison_fig.add_trace(go.Scatter(x=portfolio_cumulative_returns.index, 
+                                        y=portfolio_cumulative_returns, 
+                                        mode='lines', 
+                                        name='Optimized Portfolio', 
+                                        line=dict(color='#00FFFF')))
+    comparison_fig.add_trace(go.Scatter(x=benchmark_cumulative_returns.index, 
+                                        y=benchmark_cumulative_returns, 
+                                        mode='lines', 
+                                        name='Benchmark (S&P 500)', 
+                                        line=dict(color='#FFA500')))
+    comparison_fig.update_layout(
+        title='Portfolio vs. Benchmark Performance',
+        xaxis_title='Date',
+        yaxis_title='Cumulative Returns',
+        template='plotly_dark'
+    )
+
+    # Save graphs
+    output_directory = r"C:\gpp_v1"
+    os.makedirs(output_directory, exist_ok=True)
+    output_path = os.path.join(output_directory, "portfolio_weights_distribution.html")
+    quantstats_report_path = os.path.join(output_directory, "portfolio_analysis.html")
+
+    with open(output_path, 'w') as f:
+        f.write(bar_fig.to_html(full_html=False, include_plotlyjs='cdn'))
+        f.write(pie_fig.to_html(full_html=False, include_plotlyjs=False))
+        f.write(comparison_fig.to_html(full_html=False, include_plotlyjs=False))
+    
+    # Generate the QuantStats report
+    qs.reports.html(portfolio_returns, benchmark='^GSPC', output=quantstats_report_path)
+
+    print(f"\nPortfolio graphs have been saved as '{output_path}'")
+    print(f"Portfolio analysis with QuantStats has been saved as '{quantstats_report_path}'")
+
+else:
+    print("Could not proceed with optimization due to data issues.")
+        </code></pre>
+    </main>
+    <a href="project_4.html" class="back-button">Return to Home</a>
+    <footer>
+        <p>© 2024 Jorge Tobón. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
