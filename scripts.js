@@ -135,3 +135,21 @@ document.getElementById('hideArchivedButton').addEventListener('click', function
     document.getElementById('archivedArticlesContainer').classList.add('hidden'); // Ocultar los artículos
     this.classList.add('hidden'); // Ocultar el botón de ocultar todos
 });
+let slideIndex = 0;
+
+function moveSlide(n) {
+    const slides = document.querySelectorAll('.carousel-container img');
+    slideIndex += n;
+
+    // Ajustar el índice si llega al inicio o final del carrusel
+    if (slideIndex < 0) {
+        slideIndex = slides.length - 1;
+    } else if (slideIndex >= slides.length) {
+        slideIndex = 0;
+    }
+
+    // Calcular el desplazamiento y aplicar la transformación
+    const offset = -slideIndex * 100;
+    const container = document.querySelector('.carousel-container');
+    container.style.transform = `translateX(${offset}%)`;
+}
