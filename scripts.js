@@ -153,3 +153,34 @@ function moveSlide(n) {
     const container = document.querySelector('.carousel-container');
     container.style.transform = `translateX(${offset}%)`;
 }
+function setREVStartSize(e){
+            window.RSIW = window.RSIW === undefined ? window.innerWidth : window.RSIW;
+            window.RSIH = window.RSIH === undefined ? window.innerHeight : window.RSIH;
+            try {
+                var pw = document.getElementById(e.c).parentNode.offsetWidth,
+                    newh;
+                pw = pw === 0 || isNaN(pw) || (e.l === "fullwidth" || e.layout === "fullwidth") ? window.RSIW : pw;
+                e.mh = e.mh === undefined || e.mh === "" || e.mh === "auto" ? 0 : parseInt(e.mh, 0);
+                
+                if (e.layout === "fullscreen" || e.l === "fullscreen")
+                    newh = Math.max(e.mh, window.RSIH);
+                else {
+                    newh = 400; // Ajusta esta altura base según lo necesites
+                }
+                
+                var el = document.getElementById(e.c);
+                if (el !== null && el) el.style.height = newh + "px";
+                el = document.getElementById(e.c + "_wrapper");
+                if (el !== null && el) {
+                    el.style.height = newh + "px";
+                    el.style.display = "block";
+                }
+            } catch (e) {
+                console.log("Failure at Presize of Slider:" + e);
+            }
+        }
+
+        // Llamada a la función para ajustar el carrusel
+        window.onload = function() {
+            setREVStartSize({ c: 'carousel-container', layout: 'fullwidth' });
+        };
