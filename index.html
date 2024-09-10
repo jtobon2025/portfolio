@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My projects</title>
+    <title>My Projects</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -35,13 +35,11 @@
         <h2>Welcome to My Portfolio</h2>
         
         <!-- Carrusel de Imágenes -->
-        <div class="carousel">
+        <div class="carousel" id="carousel-container">
             <div class="carousel-container">
                 <img src="test4.jpg" alt="Image 1">
                 <img src="test3.jpg" alt="Image 2">
-                <img src="test2.jpg" alt="Image 2">
-                
-                
+                <img src="test2.jpg" alt="Image 3">
             </div>
             <!-- Controles del carrusel -->
             <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
@@ -55,15 +53,13 @@
                 <!-- Los proyectos se cargarán dinámicamente aquí desde el JSON -->
             </div>
 
-     <!-- Contenedor de proyectos archivados -->
-    <div id="archivedArticlesContainer" class="hidden">
-        <!-- Los proyectos archivados se generarán dinámicamente aquí -->
-    </div>
-    
-    <!-- Botón para ocultar artículos archivados -->
-    <button id="hideArchivedButton" class="hidden">Hide Archived Articles</button>
-
-
+            <!-- Contenedor de proyectos archivados -->
+            <div id="archivedArticlesContainer" class="hidden">
+                <!-- Los proyectos archivados se generarán dinámicamente aquí -->
+            </div>
+            
+            <!-- Botón para ocultar artículos archivados -->
+            <button id="hideArchivedButton" class="hidden">Hide Archived Articles</button>
         </div>
     </section>
 
@@ -93,7 +89,41 @@
     </footer>
 
     <script src="scripts.js"></script>
+    
+    <!-- Ajustar la altura del carrusel -->
+    <script>
+        function setREVStartSize(e){
+            window.RSIW = window.RSIW === undefined ? window.innerWidth : window.RSIW;
+            window.RSIH = window.RSIH === undefined ? window.innerHeight : window.RSIH;
+            try {
+                var pw = document.getElementById(e.c).parentNode.offsetWidth,
+                    newh;
+                pw = pw === 0 || isNaN(pw) || (e.l === "fullwidth" || e.layout === "fullwidth") ? window.RSIW : pw;
+                e.mh = e.mh === undefined || e.mh === "" || e.mh === "auto" ? 0 : parseInt(e.mh, 0);
+                
+                if (e.layout === "fullscreen" || e.l === "fullscreen")
+                    newh = Math.max(e.mh, window.RSIH);
+                else {
+                    newh = 400; // Ajusta esta altura base según lo necesites
+                }
+                
+                var el = document.getElementById(e.c);
+                if (el !== null && el) el.style.height = newh + "px";
+                el = document.getElementById(e.c + "_wrapper");
+                if (el !== null && el) {
+                    el.style.height = newh + "px";
+                    el.style.display = "block";
+                }
+            } catch (e) {
+                console.log("Failure at Presize of Slider:" + e);
+            }
+        }
+
+        // Llamada a la función para ajustar el carrusel
+        window.onload = function() {
+            setREVStartSize({ c: 'carousel-container', layout: 'fullwidth' });
+        };
+    </script>
 
 </body>
 </html>
-
