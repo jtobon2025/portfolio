@@ -164,10 +164,13 @@ function toggleShareMenu() {
     shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
 }
 
-function downloadContent() {
-    // Implementa tu lógica para descargar el contenido aquí
-    alert('Download initiated!');
-}
+    // Función para descargar un archivo
+    function downloadFile() {
+        const link = document.createElement('a');
+        link.href = 'path/to/your/file.ext'; // Reemplaza con la ruta de tu archivo
+        link.download = 'filename.ext'; // Reemplaza con el nombre de archivo deseado
+        link.click();
+    }
 
 function saveContent() {
     // Implementa tu lógica para guardar el contenido aquí
