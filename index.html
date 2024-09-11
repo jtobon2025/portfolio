@@ -8,33 +8,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- Share Toolbar -->
+<!-- Barra de herramientas de compartir -->
 <div class="share-toolbar">
     <div class="toolbar-item">
-        <button class="share-btn" onclick="toggleShareMenu()">&#x1F4E3; Share</button>
-        <div class="share-menu" id="shareMenu">
-             <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.linkedin.com/in/jorge-tobon-forum-financiero/" target="_blank" class="share-option">
-                 <img src="linkedin-icon.png" alt="LinkedIn"> LinkedIn
+        <button class="share-btn" onclick="toggleShareMenu()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 16C16.7 16 15.5 16.5 14.6 17.4L8.9 14.5C9 14.3 9 14.2 9 14C9 13.8 9 13.7 8.9 13.5L14.5 10.6C15.4 11.5 16.7 12 18 12C19.7 12 21 10.7 21 9C21 7.3 19.7 6 18 6C16.3 6 15 7.3 15 9C15 9.2 15 9.4 15.1 9.6L9.5 12.5C8.6 11.6 7.3 11 6 11C4.3 11 3 12.3 3 14C3 15.7 4.3 17 6 17C7.3 17 8.6 16.4 9.5 15.5L15.1 18.4C15 18.6 15 18.8 15 19C15 20.7 16.3 22 18 22C19.7 22 21 20.7 21 19C21 17.3 19.7 16 18 16Z" fill="#333"/>
+            </svg>
+            Share
+        </button>
+        <div class="share-menu">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.linkedin.com/in/jorge-tobon-forum-financiero/" class="share-option">
+                <img src="linkedin-icon.svg" alt="LinkedIn"> LinkedIn
             </a>
-            <a href="https://twitter.com/intent/tweet?url=@jorge2049888625" class="share-option" target="_blank">
-                <img src="x-icon.png" alt="X"> X
+            <a href="https://x.com/share?url=https://jtobon2025.github.io/portfolio/" class="share-option">
+                <img src="x-icon.svg" alt="X"> X
             </a>
-           <a href="mailto:?subject=Check%20this%20out&body=Hi,%0A%0ACheck%20out%20this%20link:%20https://example.com" class="share-option">
-                <img src="email-icon.png" alt="Email"> Email
+            <a href="mailto:?subject=Check%20this%20out&body=Here%20is%20something%20interesting:%20https://jtobon2025.github.io/portfolio/" class="share-option">
+                
+                <img src="email-icon.svg" alt="Email"> Email
             </a>
-
         </div>
     </div>
-    <div class="toolbar-item">
-        <button onclick="window.print()">&#x1F5B6; Print</button>
-    </div>
-    <div class="toolbar-item">
-        <button onclick="downloadContent()">&#x2B07; Download</button>
-    </div>
-    <div class="toolbar-item">
-        <button onclick="saveContent()">&#x1F516; Save</button>
-    </div>
+    <!-- Botones adicionales -->
+    <button class="share-btn">
+        <svg> <!-- SVG del icono de imprimir --> </svg>
+        Print
+    </button>
+    <button class="share-btn">
+        <svg> <!-- SVG del icono de descargar --> </svg>
+        Download
+    </button>
+    <button class="share-btn">
+        <svg> <!-- SVG del icono de guardar --> </svg>
+        Save
+    </button>
 </div>
+
 
 
 
