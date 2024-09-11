@@ -422,3 +422,56 @@ iframe {
 .back-button:hover {
     background-color: #0056b3;
 }
+/* Barra compartir y otras opciones septiembre 10 2024
+/* Share Toolbar */
+.share-toolbar {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+
+.toolbar-item {
+    position: relative;
+}
+
+.share-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.share-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+.share-option {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.share-option img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.share-option:hover {
+    background-color: #f0f0f0;
+}
