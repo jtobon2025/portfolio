@@ -153,3 +153,19 @@ function moveSlide(n) {
     const container = document.querySelector('.carousel-container');
     container.style.transform = `translateX(${offset}%)`;
 }
+// FUNCIONES PARA EL MANEJO DE LAS OPCIONES DE LA BARRA COMPARTIR SEPTIEMBRE 11/2024
+
+function toggleShareMenu() {
+    const shareMenu = document.getElementById('shareMenu');
+    shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
+}
+
+function downloadContent() {
+    // Implementa tu lógica para descargar el contenido aquí
+    alert('Download initiated!');
+}
+
+function saveContent() {
+    // Implementa tu lógica para guardar el contenido aquí
+    alert('Content saved!');
+}
