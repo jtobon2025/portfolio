@@ -422,8 +422,8 @@ iframe {
 .back-button:hover {
     background-color: #0056b3;
 }
-/* Barra compartir y otras opciones septiembre 10 2024
-/* Share Toolbar */
+
+/* Barra de herramientas de compartir */
 .share-toolbar {
     display: flex;
     gap: 10px;
@@ -444,6 +444,12 @@ iframe {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.share-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #333;
 }
 
 .share-menu {
@@ -474,4 +480,9 @@ iframe {
 
 .share-option:hover {
     background-color: #f0f0f0;
+}
+
+/* Mostrar el menú al hacer clic */
+.toolbar-item:hover .share-menu {
+    display: block;
 }
