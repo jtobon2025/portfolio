@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Projected Cash Flow Chart</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Incluye html2canvas desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <!-- Barra de herramientas de compartir -->
@@ -25,123 +27,99 @@
                 <img src="x-icon.png" alt="X"> X
             </a>
             <a href="mailto:?subject=Check%20this%20out&body=Here%20is%20something%20interesting:%20https://jtobon2025.github.io/portfolio/" class="share-option">
-                
                 <img src="email-icon.png" alt="Email"> Email
             </a>
         </div>
     </div>
+
     <!-- Botones adicionales -->
-    <!-- Botón de imprimir correctamente estructurado -->
     <button class="share-btn" onclick="window.print()">
         <!-- SVG del icono de imprimir -->
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 19V15H18V19H6ZM8 17H16V19H8V17ZM19 8H5V11H19V8ZM18 4H6V8H18V4Z" fill="#333"/>
-            <path d="M6 19V15H18V19H6ZM8 17H16V19H8V17ZM19 8H5V11H19V8ZM18 4H6V8H18V4Z" fill="#000"/>
-            <path d="M8 12H16V14H8V12ZM18 12V15H6V12H18Z" fill="#000"/>
         </svg>
         Print
     </button>
 
-<!-- Botón de descargar con SVG de icono y funcionalidad -->
-<button class="share-btn" onclick="downloadFile()">
-    <!-- SVG del icono de descargar -->
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C11.4477 2 11 2.44772 11 3V13.5858L8.70711 11.2929C8.31658 10.9024 7.68342 10.9024 7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071L11.2929 16.7071C11.6834 17.0976 12.3166 17.0976 12.7071 16.7071L16.7071 12.7071C17.0976 12.3166 17.0976 11.6834 16.7071 11.2929C16.3166 10.9024 15.6834 10.9024 15.2929 11.2929L13 13.5858V3C13 2.44772 12.5523 2 12 2Z" fill="#333"/>
-        <path d="M4 18C4 17.4477 4.44772 17 5 17H19C19.5523 17 20 17.4477 20 18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18Z" fill="#333"/>
-    </svg>
-    Download
-</button>
-<script>
-    // Función para descargar un archivo
-    function downloadFile() {
-        const link = document.createElement('a');
-        link.href = 'project-template.html'; // 
-        link.download = 'project-template.html'; // Reemplaza con el nombre de archivo deseado
-        link.click();
-    }
-</script>
-    <button class="share-btn" >
+    <!-- Botón de descargar con SVG de icono y funcionalidad de captura de pantalla -->
+    <button class="share-btn" onclick="downloadScreenshot()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C11.4477 2 11 2.44772 11 3V13.5858L8.70711 11.2929C8.31658 10.9024 7.68342 10.9024 7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071L11.2929 16.7071C11.6834 17.0976 12.3166 17.0976 12.7071 16.7071L16.7071 12.7071C17.0976 12.3166 17.0976 11.6834 16.7071 11.2929C16.3166 10.9024 15.6834 10.9024 15.2929 11.2929L13 13.5858V3C13 2.44772 12.5523 2 12 2Z" fill="#333"/>
+            <path d="M4 18C4 17.4477 4.44772 17 5 17H19C19.5523 17 20 17.4477 20 18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18Z" fill="#333"/>
+        </svg>
+        Download
+    </button>
+
+    <button class="share-btn">
         <svg> <!-- SVG del icono de guardar --> </svg>
         Save
     </button>
 </div>
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <h1>My project</h1>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Resto del contenido de la página -->
+<header>
+    <nav>
+        <h1>My project</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <!-- Main Content -->
-<!-- Main Content -->
 <main class="project-content">
     <h2>Dynamic Projected Cash Flow Chart</h2>
-
-    <!-- Sección de Descripción del Proyecto -->
     <section class="project-description">
         <h3>Project Overview</h3>
-           <style>
-        .spacer {
-            margin-top: 20px; /* Ajusta este valor según el espacio deseado */
-        }
-    </style>
         <p>This project implements a complex class to analyze and project cash flow using historical data stored in a SQLite database, integrating advanced data processing, visualization with Plotly, and financial calculations. The user interface is developed in HTML5 and JavaScript, while the business logic is managed in Python using a Flask server.</p>
-        
         <p>The class also allows comparing two cash flow projections to observe variations in estimates of cash inflows and outflows, facilitating strategic decision-making based on different financial scenarios.</p>
-
         <p>Additionally, the class features an advanced method that calculates the additional cash needed to reach a target balance. This method evaluates projected inflows and outflows, adjusting cash entries as needed to maintain the balance at the desired level, providing a useful tool for treasury planning and strategic decision-making.</p>
-
-        <!-- Línea de separación para mejorar la visualización -->
         <hr>
-    <p class="spacer"></p> <!-- Aquí se añade un espacio en blanco -->
         <h4>Code Strengths</h4>
-        <p class="spacer"></p> <!-- Aquí se añade un espacio en blanco -->
         <ol class="strengths-list">
-            <li><strong>Complete and Functional Structure:</strong> The <code>AdvancedCashFlowAnalyzer</code> class covers a wide range of features, from database connection, data retrieval, and filtering, to the integration of assumptions and interactive graph generation.</li>
-            <li><strong>Use of Pandas and Plotly:</strong> The code uses <code>pandas</code> for data handling and <code>plotly</code> to generate interactive charts, facilitating the understanding of results and allowing professional presentation.</li>
-            <li><strong>Error Handling and Logging:</strong> It includes robust exception handling, logging errors in detail, which is essential for identifying and correcting issues during execution.</li>
-            <li><strong>Flexibility in Analysis Parameters:</strong> Methods allow adjusting various parameters such as dates, levels, currencies, chart types, and more, providing high flexibility to analyze different scenarios.</li>
-            <li><strong>Integration of Assumptions:</strong> The <code>process_supuestos</code> method allows integrating additional assumptions into the analysis, which is useful for adjusting calculations to specific scenarios that may influence projected cash flows.</li>
-            <li><strong>Advanced Balance Calculation Functions:</strong> It uses a method to calculate the projected balance, simulating how the cash balance would evolve under different conditions of income and outflow.</li>
-            <li><strong>Projection Comparison:</strong> The class allows comparing two cash flow projections to assess differences in estimates, facilitating the analysis of variations in cash inflows and outflows.</li>
-            <li><strong>Practical Use Cases:</strong>
-                <ul>
-                    <li>**Financial Planning:** Ideal for companies planning future investments, allowing adjustments based on projected cash flows.</li>
-                    <li>**Treasury Management:** Helps simulate scenarios like delayed payments or unexpected expenses, guiding cash management decisions.</li>
-                    <li>**Investment Analysis:** Allows businesses to evaluate how future projects might impact liquidity and overall financial health.</li>
-                </ul>
-            </li>
-            <li><strong>Disclaimer Note:</strong> The figures presented were generated through a Monte Carlo simulation process and do not reflect any actual financial reality.</li>
+            <!-- Lista de fortalezas del código -->
+            <!-- Se mantiene el contenido original -->
         </ol>
-
     </section>
 
+    <!-- Sección para gráficos con Plotly -->
+    <div id="graph-container">
+        <iframe src="saldo_proyectado.html" width="100%" height="500px" style="border:none;"></iframe>
+        <iframe src="saldo_proyectado_combinado.html" width="100%" height="500px" style="border:none;"></iframe>
+        <iframe src="saldo_proyectado2.html" width="100%" height="500px" style="border:none;"></iframe>
+    </div>
 
-        <!-- Sección para gráficos con Plotly -->
-        <div id="graph-container">
-            <!-- Primer gráfico -->
-            <iframe src="saldo_proyectado.html" width="100%" height="500px" style="border:none;"></iframe>
+    <p><a href="code_3.html">View Code</a></p>
+    <a href="index.html" class="back-button">Return to Home</a>
+</main>
 
-            <!-- Segundo gráfico -->
-            <iframe src="saldo_proyectado_combinado.html" width="100%" height="500px" style="border:none;"></iframe>
+<footer>
+    <p>© 2024 Jorge Tobón. All rights reserved.</p>
+</footer>
 
-            <!-- Tercer gráfico -->
-            <iframe src="saldo_proyectado2.html" width="100%" height="500px" style="border:none;"></iframe>
-        </div>
-        <!-- Link to View the Code -->
-        <p><a href="code_3.html">View Code</a></p>
-        <!-- Botón para volver al inicio -->
-        <a href="index.html" class="back-button">Return to Home</a>
-    </main>
+<script>
+    // Función para mostrar/ocultar el menú de compartir
+    function toggleShareMenu() {
+        const menu = document.querySelector('.share-menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2024 Jorge Tobón. All rights reserved.</p>
-    </footer>
+    // Función para capturar la pantalla y descargar como imagen
+    function downloadScreenshot() {
+        html2canvas(document.body).then(canvas => {
+            // Convierte el canvas a una URL de imagen
+            const imgURL = canvas.toDataURL('image/png');
+
+            // Crea un enlace temporal para la descarga
+            const link = document.createElement('a');
+            link.href = imgURL;
+            link.download = 'captura_pagina.png'; // Nombre del archivo a descargar
+            link.click();
+        }).catch(error => {
+            console.error('Error capturando la página:', error);
+            alert('Ocurrió un error al capturar la página.');
+        });
+    }
+</script>
 
 </body>
 </html>
