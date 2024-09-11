@@ -74,10 +74,25 @@
         <p>Additionally, the class features an advanced method that calculates the additional cash needed to reach a target balance. This method evaluates projected inflows and outflows, adjusting cash entries as needed to maintain the balance at the desired level, providing a useful tool for treasury planning and strategic decision-making.</p>
         <hr>
         <h4>Code Strengths</h4>
+      <p class="spacer"></p> <!-- Aquí se añade un espacio en blanco -->
         <ol class="strengths-list">
-            <!-- Lista de fortalezas del código -->
-            <!-- Se mantiene el contenido original -->
+            <li><strong>Complete and Functional Structure:</strong> The <code>AdvancedCashFlowAnalyzer</code> class covers a wide range of features, from database connection, data retrieval, and filtering, to the integration of assumptions and interactive graph generation.</li>
+            <li><strong>Use of Pandas and Plotly:</strong> The code uses <code>pandas</code> for data handling and <code>plotly</code> to generate interactive charts, facilitating the understanding of results and allowing professional presentation.</li>
+            <li><strong>Error Handling and Logging:</strong> It includes robust exception handling, logging errors in detail, which is essential for identifying and correcting issues during execution.</li>
+            <li><strong>Flexibility in Analysis Parameters:</strong> Methods allow adjusting various parameters such as dates, levels, currencies, chart types, and more, providing high flexibility to analyze different scenarios.</li>
+            <li><strong>Integration of Assumptions:</strong> The <code>process_supuestos</code> method allows integrating additional assumptions into the analysis, which is useful for adjusting calculations to specific scenarios that may influence projected cash flows.</li>
+            <li><strong>Advanced Balance Calculation Functions:</strong> It uses a method to calculate the projected balance, simulating how the cash balance would evolve under different conditions of income and outflow.</li>
+            <li><strong>Projection Comparison:</strong> The class allows comparing two cash flow projections to assess differences in estimates, facilitating the analysis of variations in cash inflows and outflows.</li>
+            <li><strong>Practical Use Cases:</strong>
+                <ul>
+                    <li>**Financial Planning:** Ideal for companies planning future investments, allowing adjustments based on projected cash flows.</li>
+                    <li>**Treasury Management:** Helps simulate scenarios like delayed payments or unexpected expenses, guiding cash management decisions.</li>
+                    <li>**Investment Analysis:** Allows businesses to evaluate how future projects might impact liquidity and overall financial health.</li>
+                </ul>
+            </li>
+            <li><strong>Disclaimer Note:</strong> The figures presented were generated through a Monte Carlo simulation process and do not reflect any actual financial reality.</li>
         </ol>
+
     </section>
 
     <!-- Sección para gráficos con Plotly -->
