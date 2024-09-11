@@ -9,24 +9,29 @@
 </head>
 <body>
 <!-- Share Toolbar -->
-<!-- Menú de compartir con la opción de Instagram -->
-<div class="share-menu" id="shareMenu">
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.linkedin.com/in/jorge-tobon-forum-financiero/" target="_blank" class="share-option">
-        <img src="linkedin-icon.png" alt="LinkedIn"> LinkedIn
-    </a>
-    <a href="https://twitter.com/intent/tweet?text=Texto_a_Compartir&url=URL_A_COMPARTIR" target="_blank" class="share-option">
-        <img src="x-icon.png" alt="X"> X
-    </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=URL_A_COMPARTIR" target="_blank" class="share-option">
-        <img src="facebook-icon.png" alt="Facebook"> Facebook
-    </a>
-    <a href="https://www.instagram.com" target="_blank" class="share-option">
-        <img src="instagram-icon.png" alt="Instagram"> Instagram
-    </a>
-    <a href="mailto:?subject=Check%20this%20out&body=Visit%20URL_A_COMPARTIR" target="_blank" class="share-option">
-        <img src="email-icon.png" alt="Email"> Email
-    </a>
+<div class="share-toolbar">
+    <div class="toolbar-item">
+        <button class="share-btn" onclick="toggleShareMenu()">&#x1F4E3; Share</button>
+        <div class="share-menu" id="shareMenu">
+             <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.linkedin.com/in/jorge-tobon-forum-financiero/" target="_blank" class="share-option">
+                 <img src="linkedin-icon.png" alt="LinkedIn"> LinkedIn
+            </a>
+            <a href="#" class="share-option"><img src="x-icon.png" alt="X"> X</a>
+            <a href="#" class="share-option"><img src="facebook-icon.png" alt="Facebook"> Facebook</a>
+            <a href="#" class="share-option"><img src="email-icon.png" alt="Email"> Email</a>
+        </div>
+    </div>
+    <div class="toolbar-item">
+        <button onclick="window.print()">&#x1F5B6; Print</button>
+    </div>
+    <div class="toolbar-item">
+        <button onclick="downloadContent()">&#x2B07; Download</button>
+    </div>
+    <div class="toolbar-item">
+        <button onclick="saveContent()">&#x1F516; Save</button>
+    </div>
 </div>
+
 
 
     <!-- Header -->
