@@ -358,3 +358,67 @@ iframe {
     font-size: 1.2em;
     color: #007bff;
 }
+/* Estilos para manejar magenes  y espacios entre  parrafos septiembre 11 de 2024
+
+/* Ajustes generales */
+body {
+    line-height: 1.8; /* Mejora la legibilidad */
+    padding: 0 2rem; /* Añade espacio a los lados */
+}
+
+.project-description {
+    margin: 2rem 0; /* Añade más espacio entre secciones */
+    padding: 2rem; /* Mejora la legibilidad y el aspecto */
+    background-color: #f8f8f8; /* Ligero color de fondo para destacar */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Espaciado entre párrafos */
+.project-description p {
+    margin-bottom: 1.5rem; /* Espacio entre párrafos */
+}
+
+/* Estilo de listas */
+.project-description ul,
+.project-description ol {
+    padding-left: 20px; /* Espaciado a la izquierda */
+    margin-bottom: 1rem; /* Espacio entre listas y otros elementos */
+}
+
+.project-description li {
+    margin-bottom: 0.75rem; /* Espacio entre ítems de la lista */
+}
+
+/* Estilos de las fórmulas matemáticas */
+.project-description p > math {
+    display: block;
+    margin: 1rem 0; /* Espacio alrededor de las fórmulas */
+    text-align: center; /* Centrado de las fórmulas */
+}
+
+/* Ajustes para los gráficos */
+#graph-container {
+    margin-top: 2rem; /* Espacio adicional antes de los gráficos */
+}
+
+iframe {
+    margin-bottom: 2rem; /* Espacio entre los gráficos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra para destacar los gráficos */
+    border-radius: 8px; /* Bordes redondeados para mejor apariencia */
+}
+
+/* Botón de regreso */
+.back-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
