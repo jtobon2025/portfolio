@@ -51,7 +51,15 @@
     </svg>
     Download
 </button>
-
+<script>
+    // Función para descargar un archivo
+    function downloadFile() {
+        const link = document.createElement('a');
+        link.href = 'project-template.html'; // 
+        link.download = 'filename.ext'; // Reemplaza con el nombre de archivo deseado
+        link.click();
+    }
+</script>
     <button class="share-btn" >
         <svg> <!-- SVG del icono de guardar --> </svg>
         Save
