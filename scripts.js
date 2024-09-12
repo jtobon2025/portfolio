@@ -12,32 +12,6 @@ window.onload = function() {
     loadArticles(); // Cargar los artículos desde JSON
 };
 
-// Función para cargar artículos dinámicamente desde JSON
-function loadArticles() {
-    fetch('articles.json')
-        .then(response => response.json())
-        .then(data => {
-            const articlesContainer = document.getElementById('articles-container');
-            if (!articlesContainer) {
-                console.error('No se encontró el contenedor de artículos.');
-                return;
-            }
-
-            // Mostrar artículos actuales
-            data.current.forEach(article => {
-                const articleElement = createArticleElement(article);
-                articlesContainer.appendChild(articleElement);
-            });
-
-            // Botón para mostrar artículos archivados
-            const showArchivedButton = document.createElement('button');
-            showArchivedButton.textContent = 'Show Archived Articles';
-            showArchivedButton.onclick = () => showArchivedArticles(data.archived);
-            articlesContainer.appendChild(showArchivedButton);
-        })
-        .catch(error => console.error('Error loading articles:', error));
-}
-
 // Función para crear un elemento de artículo
 
 function createArticleElement(article) {
@@ -116,7 +90,6 @@ function createArticleElement(article, isArchived = false) {
     return articleElement;
 }
 
-// Función para mostrar los artículos archivados
 // Función para mostrar los artículos archivados en grupos de cinco
 function showArchivedArticles(archivedArticles) {
     const archivedContainer = document.getElementById('archivedArticlesContainer');
