@@ -117,18 +117,62 @@ function createArticleElement(article, isArchived = false) {
 }
 
 // Función para mostrar los artículos archivados
+// Función para mostrar los artículos archivados en grupos de cinco
 function showArchivedArticles(archivedArticles) {
     const archivedContainer = document.getElementById('archivedArticlesContainer');
     archivedContainer.innerHTML = ''; // Limpiar contenido previo
 
-    archivedArticles.forEach(article => {
-        const articleElement = createArticleElement(article, true);
-        archivedContainer.appendChild(articleElement);
-    });
+    // Dividir los artículos en grupos de 5
+    const chunkSize = 5;
+    let chunks = [];
+    for (let i = 0; i < archivedArticles.length; i += chunkSize) {
+        chunks.push(archivedArticles.slice(i, i + chunkSize));
+    }
+
+    // Crear botones de navegación entre grupos
+    let currentGroup = 0;
+    function renderGroup(groupIndex) {
+        archivedContainer.innerHTML = '';
+        chunks[groupIndex].forEach(article => {
+            const articleElement = createArticleElement(article, true);
+            archivedContainer.appendChild(articleElement);
+        });
+    }
+
+    function showNextGroup() {
+        if (currentGroup < chunks.length - 1) {
+            currentGroup++;
+            renderGroup(currentGroup);
+        }
+    }
+
+    function showPreviousGroup() {
+        if (currentGroup > 0) {
+            currentGroup--;
+            renderGroup(currentGroup);
+        }
+    }
+
+    // Renderizar el primer grupo y agregar controles de navegación
+    renderGroup(currentGroup);
+
+    const navControls = document.createElement('div');
+    navControls.classList.add('nav-controls');
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Previous';
+    prevButton.onclick = showPreviousGroup;
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.onclick = showNextGroup;
+    navControls.appendChild(prevButton);
+    navControls.appendChild(nextButton);
+
+    archivedContainer.appendChild(navControls);
 
     archivedContainer.classList.remove('hidden'); // Mostrar los artículos archivados
     document.getElementById('hideArchivedButton').classList.remove('hidden'); // Mostrar botón para ocultar todos
 }
+
 
 // Evento para ocultar todos los artículos archivados
 document.getElementById('hideArchivedButton').addEventListener('click', function() {
