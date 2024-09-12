@@ -510,16 +510,28 @@ iframe {
     margin-top: 20px;
 }
 
+*********
+
+/* Ajustes para los controles de navegación entre grupos */
+
+
 .nav-controls button {
-    padding: 10px 15px;
+    padding: 8px 12px; /* Ajustar el padding para reducir el tamaño */
     border: none;
     background-color: #007bff;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 14px; /* Tamaño de fuente adecuado */
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-controls button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+}
+
+.nav-controls button:active {
+    transform: translateY(0); /* Efecto de clic */
 }
