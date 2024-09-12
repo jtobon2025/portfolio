@@ -93,7 +93,7 @@ function createArticleElement(article, isArchived = false) {
 // Función para mostrar los artículos archivados en grupos de cinco
 function showArchivedArticles(archivedArticles) {
     const archivedContainer = document.getElementById('archivedArticlesContainer');
-    archivedContainer.classList.add('articles-container'); // Asegura que use la misma clase de estilo
+    archivedContainer.classList.add('articles-container');
     archivedContainer.innerHTML = ''; // Limpiar contenido previo
 
     // Dividir los artículos en grupos de 5
@@ -103,48 +103,56 @@ function showArchivedArticles(archivedArticles) {
         chunks.push(archivedArticles.slice(i, i + chunkSize));
     }
 
-    // Crear botones de navegación entre grupos
+    // Crear contenedor de controles de navegación
+    const controlsContainer = document.createElement('div');
+    controlsContainer.classList.add('controls-container');
+
+    // Botón de "Previous"
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Previous';
+    prevButton.onclick = () => {
+        if (currentGroup > 0) {
+            currentGroup--;
+            renderGroup(currentGroup);
+        }
+    };
+
+    // Botón de "Next"
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.onclick = () => {
+        if (currentGroup < chunks.length - 1) {
+            currentGroup++;
+            renderGroup(currentGroup);
+        }
+    };
+
+    // Botón de "Hide Archived Articles"
+    const hideButton = document.getElementById('hideArchivedButton');
+
+    // Agregar botones al contenedor de controles
+    controlsContainer.appendChild(hideButton);
+    controlsContainer.appendChild(prevButton);
+    controlsContainer.appendChild(nextButton);
+
+    // Añadir contenedor de controles a la página
+    archivedContainer.appendChild(controlsContainer);
+
+    // Renderizar el primer grupo
     let currentGroup = 0;
     function renderGroup(groupIndex) {
         archivedContainer.innerHTML = '';
+        archivedContainer.appendChild(controlsContainer); // Asegurar que los controles estén siempre visibles
         chunks[groupIndex].forEach(article => {
             const articleElement = createArticleElement(article, true);
             archivedContainer.appendChild(articleElement);
         });
     }
 
-    function showNextGroup() {
-        if (currentGroup < chunks.length - 1) {
-            currentGroup++;
-            renderGroup(currentGroup);
-        }
-    }
-
-    function showPreviousGroup() {
-        if (currentGroup > 0) {
-            currentGroup--;
-            renderGroup(currentGroup);
-        }
-    }
-
-    // Renderizar el primer grupo y agregar controles de navegación
     renderGroup(currentGroup);
 
-    const navControls = document.createElement('div');
-    navControls.classList.add('nav-controls');
-    const prevButton = document.createElement('button');
-    prevButton.textContent = 'Previous';
-    prevButton.onclick = showPreviousGroup;
-    const nextButton = document.createElement('button');
-    nextButton.textContent = 'Next';
-    nextButton.onclick = showNextGroup;
-    navControls.appendChild(prevButton);
-    navControls.appendChild(nextButton);
-
-    archivedContainer.appendChild(navControls);
-
     archivedContainer.classList.remove('hidden'); // Mostrar los artículos archivados
-    document.getElementById('hideArchivedButton').classList.remove('hidden'); // Mostrar botón para ocultar todos
+    hideButton.classList.remove('hidden'); // Mostrar botón de ocultar
 }
 
 // Evento para ocultar todos los artículos archivados
