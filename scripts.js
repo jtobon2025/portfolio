@@ -13,8 +13,6 @@ window.onload = function() {
 };
 
 // Función para crear un elemento de artículo
-
-// Función para crear un elemento de artículo
 function createArticleElement(article, isArchived = false) {
     const articleElement = document.createElement('article');
     articleElement.classList.add('article');
@@ -29,13 +27,14 @@ function createArticleElement(article, isArchived = false) {
     if (isArchived) {
         const hideButton = document.createElement('button');
         hideButton.textContent = 'Hide';
-        hideButton.classList.add('read-more'); // Aplica la clase 'read-more' para que tenga el mismo estilo
+        hideButton.classList.add('read-more'); // Aplicar la misma clase que los botones "Read More"
         hideButton.onclick = () => articleElement.remove();
         articleElement.appendChild(hideButton);
     }
 
     return articleElement;
 }
+
 
 
 
