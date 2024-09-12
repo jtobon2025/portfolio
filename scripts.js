@@ -14,15 +14,26 @@ window.onload = function() {
 
 // Función para crear un elemento de artículo
 
-function createArticleElement(article) {
+// Función para crear un elemento de artículo
+function createArticleElement(article, isArchived = false) {
     const articleElement = document.createElement('article');
     articleElement.classList.add('article');
     articleElement.innerHTML = `
         <h4>${article.title}</h4>
-        <p>${article.summary.substring(0, 100)}...</p>
+        <p>${article.summary}</p>
         <span class="date">Published on: ${article.date}</span>
         <button class="read-more" onclick="openModal('${article.title}', '${article.summary}', '${article.link}')">Read More</button>
     `;
+    
+    // Añadir botón para ocultar si es un artículo archivado
+    if (isArchived) {
+        const hideButton = document.createElement('button');
+        hideButton.textContent = 'Hide';
+        hideButton.classList.add('read-more'); // Aplica la clase 'read-more' para que tenga el mismo estilo
+        hideButton.onclick = () => articleElement.remove();
+        articleElement.appendChild(hideButton);
+    }
+
     return articleElement;
 }
 
