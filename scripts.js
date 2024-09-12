@@ -93,6 +93,7 @@ function createArticleElement(article, isArchived = false) {
 // Función para mostrar los artículos archivados en grupos de cinco
 function showArchivedArticles(archivedArticles) {
     const archivedContainer = document.getElementById('archivedArticlesContainer');
+    archivedContainer.classList.add('articles-container'); // Asegura que use la misma clase de estilo
     archivedContainer.innerHTML = ''; // Limpiar contenido previo
 
     // Dividir los artículos en grupos de 5
@@ -145,7 +146,6 @@ function showArchivedArticles(archivedArticles) {
     archivedContainer.classList.remove('hidden'); // Mostrar los artículos archivados
     document.getElementById('hideArchivedButton').classList.remove('hidden'); // Mostrar botón para ocultar todos
 }
-
 
 // Evento para ocultar todos los artículos archivados
 document.getElementById('hideArchivedButton').addEventListener('click', function() {
