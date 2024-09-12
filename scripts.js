@@ -12,6 +12,36 @@ window.onload = function() {
     loadArticles(); // Cargar los artículos desde JSON
 };
 
+// Función para crear un elemento de artículo
+
+function createArticleElement(article) {
+    const articleElement = document.createElement('article');
+    articleElement.classList.add('article');
+    articleElement.innerHTML = `
+        <h4>${article.title}</h4>
+        <p>${article.summary.substring(0, 100)}...</p>
+        <span class="date">Published on: ${article.date}</span>
+        <button class="read-more" onclick="openModal('${article.title}', '${article.summary}', '${article.link}')">Read More</button>
+    `;
+    return articleElement;
+}
+
+
+
+// Función para mostrar la sección seleccionada y ocultar las demás
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => section.style.display = 'none');
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) selectedSection.style.display = 'block';
+}
+
+// Mostrar la sección Home por defecto al cargar la página
+window.onload = function() {
+    showSection('home');
+    loadArticles(); // Cargar los artículos desde JSON
+};
+
 // Función para cargar artículos dinámicamente desde JSON
 function loadArticles() {
     fetch('articles.json')
@@ -44,9 +74,9 @@ function createArticleElement(article, isArchived = false) {
     articleElement.classList.add('article');
     articleElement.innerHTML = `
         <h4>${article.title}</h4>
-        <p>${article.summary.substring(0, 100)}...</p>
+        <p>${article.summary}</p>
         <span class="date">Published on: ${article.date}</span>
-        <button class="read-more" onclick="openModal('${article.title}', '${article.summary}', '${article.link}')">Read More</button>
+        <a href="${article.link}" class="read-more">Read More</a>
     `;
     
     // Añadir botón para ocultar si es un artículo archivado
@@ -77,9 +107,6 @@ function showArchivedArticles(archivedArticles) {
     const controlsContainer = document.createElement('div');
     controlsContainer.classList.add('controls-container');
 
-    // Inicializa el grupo actual
-    let currentGroup = 0;
-
     // Botón de "Previous"
     const prevButton = document.createElement('button');
     prevButton.textContent = 'Previous';
@@ -102,12 +129,6 @@ function showArchivedArticles(archivedArticles) {
 
     // Botón de "Hide Archived Articles"
     const hideButton = document.getElementById('hideArchivedButton');
-    if (hideButton) {
-        hideButton.onclick = function() {
-            archivedContainer.classList.add('hidden'); // Ocultar artículos archivados
-            hideButton.classList.add('hidden'); // Ocultar botón de ocultar
-        };
-    }
 
     // Agregar botones al contenedor de controles
     controlsContainer.appendChild(hideButton);
@@ -118,9 +139,10 @@ function showArchivedArticles(archivedArticles) {
     archivedContainer.appendChild(controlsContainer);
 
     // Renderizar el primer grupo
+    let currentGroup = 0;
     function renderGroup(groupIndex) {
-        archivedContainer.innerHTML = ''; // Limpia el contenedor, pero se añade de nuevo los controles
-        archivedContainer.appendChild(controlsContainer);
+        archivedContainer.innerHTML = '';
+        archivedContainer.appendChild(controlsContainer); // Asegurar que los controles estén siempre visibles
         chunks[groupIndex].forEach(article => {
             const articleElement = createArticleElement(article, true);
             archivedContainer.appendChild(articleElement);
@@ -130,7 +152,52 @@ function showArchivedArticles(archivedArticles) {
     renderGroup(currentGroup);
 
     archivedContainer.classList.remove('hidden'); // Mostrar los artículos archivados
-    if (hideButton) hideButton.classList.remove('hidden'); // Mostrar botón de ocultar si existe
+    hideButton.classList.remove('hidden'); // Mostrar botón de ocultar
 }
 
-// Eventos adicionales y otras funciones del código aquí...
+// Evento para ocultar todos los artículos archivados
+document.getElementById('hideArchivedButton').addEventListener('click', function() {
+    document.getElementById('archivedArticlesContainer').classList.add('hidden'); // Ocultar los artículos
+    this.classList.add('hidden'); // Ocultar el botón de ocultar todos
+});
+let slideIndex = 0;
+
+function moveSlide(n) {
+    const slides = document.querySelectorAll('.carousel-container img');
+    slideIndex += n;
+
+    // Ajustar el índice si llega al inicio o final del carrusel
+    if (slideIndex < 0) {
+        slideIndex = slides.length - 1;
+    } else if (slideIndex >= slides.length) {
+        slideIndex = 0;
+    }
+
+    // Calcular el desplazamiento y aplicar la transformación
+    const offset = -slideIndex * 100;
+    const container = document.querySelector('.carousel-container');
+    container.style.transform = `translateX(${offset}%)`;
+}
+// FUNCIONES PARA EL MANEJO DE LAS OPCIONES DE LA BARRA COMPARTIR SEPTIEMBRE 11/2024
+
+//function toggleShareMenu() {
+  //  const shareMenu = document.getElementById('shareMenu');
+ //   shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
+//}
+function toggleShareMenu() {
+    const shareMenu = document.querySelector('.share-menu');
+    shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
+}
+
+    // Función para descargar un archivo
+    function downloadFile() {
+        const link = document.createElement('a');
+        link.href = 'path/to/your/file.ext'; // Reemplaza con la ruta de tu archivo
+        link.download = 'filename.ext'; // Reemplaza con el nombre de archivo deseado
+        link.click();
+    }
+
+function saveContent() {
+    // Implementa tu lógica para guardar el contenido aquí
+    alert('Content saved!');
+}
