@@ -486,3 +486,36 @@ iframe {
 .toolbar-item:hover .share-menu {
     display: block;
 }
+//manejo de articulos en grupos de 5 septiembre 11-2024
+
+/* Estilo para los contenedores de artículos archivados */
+#archivedArticlesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+/* Estilo para los controles de navegación entre grupos */
+.nav-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.nav-controls button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-controls button:hover {
+    background-color: #0056b3;
+}
