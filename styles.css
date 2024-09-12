@@ -515,23 +515,32 @@ iframe {
 /* Ajustes para los controles de navegación entre grupos */
 
 
-.nav-controls button {
-    padding: 8px 12px; /* Ajustar el padding para reducir el tamaño */
+/* Contenedor para los botones de navegación y el botón de ocultar */
+.controls-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espacio entre los botones */
+    margin-bottom: 20px;
+}
+
+.controls-container button {
+    padding: 8px 12px;
     border: none;
     background-color: #007bff;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px; /* Tamaño de fuente adecuado */
+    font-size: 14px;
     transition: background-color 0.3s, transform 0.3s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.nav-controls button:hover {
+.controls-container button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+    transform: translateY(-2px);
 }
 
-.nav-controls button:active {
-    transform: translateY(0); /* Efecto de clic */
+.controls-container button:active {
+    transform: translateY(0);
 }
